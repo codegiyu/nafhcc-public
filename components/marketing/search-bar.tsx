@@ -2,15 +2,9 @@
 
 import { FormEvent, useState } from 'react';
 import { Search } from 'lucide-react';
+import { InputWrapper } from '@/components/forms/input-wrapper';
+import { RegularSelect } from '@/components/forms/regular-select';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
 export type SearchBarOptions = {
@@ -59,56 +53,37 @@ export function SearchBar({ options, action = '/estates', className }: SearchBar
       )}>
       <fieldset className="grid flex-1 gap-4 sm:grid-cols-3">
         <legend className="sr-only">Property search filters</legend>
-        <div className="space-y-2">
-          <Label htmlFor="search-location">Location</Label>
-          <Select value={location} onValueChange={value => value && setLocation(value)}>
-            <SelectTrigger id="search-location" size="lg" className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {options.locations.map(item => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="search-type">Property type</Label>
-          <Select value={type} onValueChange={value => value && setType(value)}>
-            <SelectTrigger id="search-type" size="lg" className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {options.types.map(item => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="search-price">Price range</Label>
-          <Select value={price} onValueChange={value => value && setPrice(value)}>
-            <SelectTrigger id="search-price" size="lg" className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {options.prices.map(item => (
-                <SelectItem key={item} value={item}>
-                  {item}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <RegularSelect
+          id="search-location"
+          label="Location"
+          value={location}
+          onValueChange={setLocation}
+          options={options.locations}
+          size="lg"
+        />
+        <RegularSelect
+          id="search-type"
+          label="Property type"
+          value={type}
+          onValueChange={setType}
+          options={options.types}
+          size="lg"
+        />
+        <RegularSelect
+          id="search-price"
+          label="Price range"
+          value={price}
+          onValueChange={setPrice}
+          options={options.prices}
+          size="lg"
+        />
       </fieldset>
-      <Button type="submit" size="lg" className="w-full lg:w-auto">
-        <Search aria-hidden />
-        Search Properties
-      </Button>
+      <InputWrapper label="Search" htmlFor="search-submit" hideLabel>
+        <Button id="search-submit" type="submit" size="lg" className="h-11 w-full lg:w-auto">
+          <Search aria-hidden />
+          Search Properties
+        </Button>
+      </InputWrapper>
     </form>
   );
 }

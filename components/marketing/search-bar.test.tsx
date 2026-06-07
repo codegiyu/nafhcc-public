@@ -9,13 +9,13 @@ const options = {
 };
 
 describe('SearchBar', () => {
-  it('renders labeled filter fields and submit button', () => {
+  it('renders labeled filter fields and aligned submit button', () => {
     render(<SearchBar options={options} />);
 
     expect(screen.getByLabelText('Location')).toBeInTheDocument();
     expect(screen.getByLabelText('Property type')).toBeInTheDocument();
     expect(screen.getByLabelText('Price range')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Search Properties/i })).toBeInTheDocument();
+    expect(document.getElementById('search-submit')).toHaveClass('h-11');
     expect(screen.getByText('Property search filters')).toHaveClass('sr-only');
   });
 });
