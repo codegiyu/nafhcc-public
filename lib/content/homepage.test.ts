@@ -7,13 +7,18 @@ describe('homepage content', () => {
     expect(validateHomepageContent(content)).toEqual([]);
   });
 
-  it('includes hero, estates, services, and CTA sections', () => {
+  it('includes hero, estates, services, overlines, and CTA sections', () => {
     const content = getHomepageContent();
 
     expect(content.hero.title).toContain('Quality Housing');
+    expect(content.estates.overline).toBe('FEATURED ESTATES');
+    expect(content.services.overline).toBe('WHAT WE DO');
+    expect(content.process.overline).toBe('OUR PROCESS');
+    expect(content.propertyTypes.overline).toBe('AVAILABLE PROPERTY TYPES');
     expect(content.estates.items.length).toBeGreaterThanOrEqual(3);
     expect(content.services.items.length).toBe(4);
     expect(content.process.items.length).toBe(4);
+    expect(content.cta.description).toContain('Contact NAFHCC');
     expect(content.cta.primaryAction.href).toBe('/contact');
   });
 

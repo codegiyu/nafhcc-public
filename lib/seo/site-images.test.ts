@@ -14,4 +14,8 @@ describe('site-images', () => {
     expect(getSiteImages().logo.url).toBe('https://example.com/logo.png');
     delete process.env.NEXT_PUBLIC_SEO_LOGO_URL;
   });
+
+  it('uses local hero estate image', () => {
+    expect(getSiteImages().hero.url).toBe('/images/hero-estate.jpg');
+  });
 });

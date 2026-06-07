@@ -29,7 +29,20 @@ export type HomepageProcessStep = {
 export type HomepagePropertyType = {
   title: string;
   subtitle: string;
-  icon: 'home' | 'building' | 'layers';
+  imageUrl: string;
+  imageAlt: string;
+};
+
+export type HomepageAction = {
+  label: string;
+  href: string;
+  showArrow?: boolean;
+};
+
+export type HomepageSection = {
+  overline?: string;
+  title: string;
+  description?: string;
 };
 
 export type HomepageContent = {
@@ -37,8 +50,8 @@ export type HomepageContent = {
     overline: string;
     title: string;
     description: string;
-    primaryAction: { label: string; href: string };
-    secondaryAction: { label: string; href: string };
+    primaryAction: HomepageAction;
+    secondaryAction: HomepageAction;
     imageUrl: string;
     imageAlt: string;
   };
@@ -48,30 +61,24 @@ export type HomepageContent = {
     types: string[];
     prices: string[];
   };
-  estates: {
-    title: string;
-    action: { label: string; href: string };
+  estates: HomepageSection & {
+    action: HomepageAction;
     items: HomepageEstate[];
   };
-  services: {
-    title: string;
-    description: string;
+  services: HomepageSection & {
     items: HomepageService[];
   };
-  process: {
-    title: string;
-    description: string;
+  process: HomepageSection & {
     items: HomepageProcessStep[];
-    cta: { label: string; href: string };
+    cta: HomepageAction;
   };
-  propertyTypes: {
-    title: string;
+  propertyTypes: HomepageSection & {
     items: HomepagePropertyType[];
   };
-  cta: {
-    title: string;
-    primaryAction: { label: string; href: string };
-    secondaryAction: { label: string; href: string };
+  cta: HomepageSection & {
+    description: string;
+    primaryAction: HomepageAction;
+    secondaryAction: HomepageAction;
   };
 };
 
@@ -81,8 +88,8 @@ const homepageContent: HomepageContent = {
     title: 'Quality Housing Estates Across Nigeria',
     description:
       'NAFHCC delivers trusted residential estates, plots, and homes for the Nigerian Air Force community across Abuja and Nigeria.',
-    primaryAction: { label: 'Explore Estates', href: '/estates' },
-    secondaryAction: { label: 'Contact Us', href: '/contact' },
+    primaryAction: { label: 'Explore Estates', href: '/estates', showArrow: true },
+    secondaryAction: { label: 'Contact Us', href: '/contact', showArrow: false },
     imageUrl: getSiteImages().hero.url,
     imageAlt: getSiteImages().hero.alt,
   },
@@ -98,14 +105,15 @@ const homepageContent: HomepageContent = {
     prices: ['Any Price', 'Under ₦10M', '₦10M – ₦30M', '₦30M+'],
   },
   estates: {
+    overline: 'FEATURED ESTATES',
     title: 'NAFHCC Estates',
-    action: { label: 'View all estates', href: '/estates' },
+    action: { label: 'View all estates', href: '/estates', showArrow: true },
     items: [
       {
         title: 'NAF Valley Estate, Asokoro',
         location: 'Asokoro, Abuja',
         href: '/estates/naf-valley-estate-asokoro',
-        imageUrl: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
+        imageUrl: '/images/estate-valley.jpg',
         imageAlt: 'NAF Valley Estate Asokoro residential development',
         badge: 'For Sale',
       },
@@ -113,7 +121,7 @@ const homepageContent: HomepageContent = {
         title: 'NAF Harmony Estate',
         location: 'Port Harcourt, Rivers',
         href: '/estates/naf-harmony-estate-portharcourt',
-        imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+        imageUrl: '/images/estate-diamond.jpg',
         imageAlt: 'NAF Harmony Estate housing development',
         badge: 'New',
       },
@@ -121,13 +129,14 @@ const homepageContent: HomepageContent = {
         title: 'NAF Unity Estate, Kuje',
         location: 'Kuje, Abuja',
         href: '/estates/naf-unity-estate-kuje',
-        imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+        imageUrl: '/images/estate-unity.jpg',
         imageAlt: 'NAF Unity Estate Kuje residential area',
         badge: 'For Sale',
       },
     ],
   },
   services: {
+    overline: 'WHAT WE DO',
     title: 'Our Services',
     description:
       'End-to-end housing solutions for the Nigerian Air Force community — from estate development to home ownership.',
@@ -155,6 +164,7 @@ const homepageContent: HomepageContent = {
     ],
   },
   process: {
+    overline: 'OUR PROCESS',
     title: 'Your Path to Home Ownership',
     description: 'A simple four-step journey from browsing estates to receiving your keys.',
     items: [
@@ -179,37 +189,43 @@ const homepageContent: HomepageContent = {
         description: 'Complete payment and receive keys to your new home.',
       },
     ],
-    cta: { label: 'Get Started Now', href: '/contact' },
+    cta: { label: 'Get Started Now', href: '/contact', showArrow: true },
   },
   propertyTypes: {
+    overline: 'AVAILABLE PROPERTY TYPES',
     title: 'A home for every family',
     items: [
       {
         title: '3 Bedroom Terrace Duplex',
         subtitle: 'Complete units available',
-        icon: 'home',
+        imageUrl: '/images/estate-valley.jpg',
+        imageAlt: '3 bedroom terrace duplex at NAFHCC estate',
       },
       {
         title: '2 Bedroom Semi-Detached Bungalow',
         subtitle: 'Family-friendly layouts',
-        icon: 'building',
+        imageUrl: '/images/estate-unity.jpg',
+        imageAlt: '2 bedroom semi-detached bungalow',
       },
       {
         title: '4 Bedroom Terrace Duplex',
         subtitle: 'Premium finishes',
-        icon: 'layers',
+        imageUrl: '/images/estate-eagle.jpg',
+        imageAlt: '4 bedroom terrace duplex',
       },
       {
         title: 'Residential Plots',
         subtitle: 'Build your dream home',
-        icon: 'home',
+        imageUrl: '/images/estate-diamond.jpg',
+        imageAlt: 'Residential plots for custom home building',
       },
     ],
   },
   cta: {
     title: 'Ready to find your home?',
-    primaryAction: { label: 'Apply Now', href: '/contact' },
-    secondaryAction: { label: 'Contact Us', href: '/contact' },
+    description: 'Contact NAFHCC or apply for housing in any of our estates across Nigeria.',
+    primaryAction: { label: 'Apply Now', href: '/contact', showArrow: true },
+    secondaryAction: { label: 'Contact Us', href: '/contact', showArrow: false },
   },
 };
 

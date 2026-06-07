@@ -7,18 +7,25 @@ vi.mock('@/components/marketing/search-bar', () => ({
 }));
 
 describe('HomePageContent', () => {
-  it('renders main homepage sections including services and process anchors', () => {
+  it('renders main homepage sections including overlines and CTA description', () => {
     render(<HomePageContent />);
 
     expect(
       screen.getByRole('heading', { level: 1, name: /Quality Housing Estates Across Nigeria/i })
     ).toBeInTheDocument();
+    expect(screen.getByText('FEATURED ESTATES')).toBeInTheDocument();
+    expect(screen.getByText('WHAT WE DO')).toBeInTheDocument();
+    expect(screen.getByText('OUR PROCESS')).toBeInTheDocument();
+    expect(screen.getByText('AVAILABLE PROPERTY TYPES')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'NAFHCC Estates' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Our Services' })).toBeInTheDocument();
     expect(
       screen.getByRole('heading', { name: 'Your Path to Home Ownership' })
     ).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Ready to find your home?' })).toBeInTheDocument();
+    expect(
+      screen.getByText(/Contact NAFHCC or apply for housing in any of our estates across Nigeria/i)
+    ).toBeInTheDocument();
     expect(document.getElementById('services')).toBeInTheDocument();
     expect(document.getElementById('process')).toBeInTheDocument();
     expect(screen.getByTestId('search-bar')).toBeInTheDocument();

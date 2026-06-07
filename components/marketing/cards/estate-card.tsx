@@ -52,7 +52,7 @@ export function EstateCard({
         </p>
         <Link
           href={href}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          className="inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           View Details
           <ArrowRight className="size-4" aria-hidden />
         </Link>

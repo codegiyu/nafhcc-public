@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import { TextActionLink } from '@/components/marketing/text-action-link';
 
 type OverlineBadgeProps = {
   children: ReactNode;
@@ -18,15 +18,17 @@ export function OverlineBadge({ children, variant = 'secondary', className }: Ov
 }
 
 type SectionHeaderProps = {
+  overline?: string;
   title: string;
   description?: string;
-  action?: { label: string; href: string };
+  action?: { label: string; href: string; showArrow?: boolean };
   align?: 'left' | 'center';
   id?: string;
   className?: string;
 };
 
 export function SectionHeader({
+  overline,
   title,
   description,
   action,
@@ -45,17 +47,16 @@ export function SectionHeader({
         className
       )}>
       <div className={cn('space-y-2', isCenter && 'max-w-2xl')}>
+        {overline ? <p className="text-caption text-primary">{overline}</p> : null}
         <h2 id={id} className="text-h2 text-foreground">
           {title}
         </h2>
         {description ? <p className="text-body-lg text-muted-foreground">{description}</p> : null}
       </div>
       {action ? (
-        <Link
-          href={action.href}
-          className="text-sm font-semibold text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <TextActionLink href={action.href} showArrow={action.showArrow ?? true}>
           {action.label}
-        </Link>
+        </TextActionLink>
       ) : null}
     </div>
   );

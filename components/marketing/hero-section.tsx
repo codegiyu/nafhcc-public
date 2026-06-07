@@ -1,15 +1,21 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
 import { OverlineBadge } from '@/components/marketing/overline-badge';
-import { ButtonLink } from '@/components/ui/button-link';
+import { ButtonLinkWithArrow } from '@/components/ui/button-link-with-arrow';
 import { cn } from '@/lib/utils';
+
+type HeroAction = {
+  label: string;
+  href: string;
+  showArrow?: boolean;
+};
 
 type HeroSectionProps = {
   overline: string;
   title: string;
   description: string;
-  primaryAction: { label: string; href: string };
-  secondaryAction: { label: string; href: string };
+  primaryAction: HeroAction;
+  secondaryAction: HeroAction;
   imageUrl: string;
   imageAlt: string;
   statsSlot?: ReactNode;
@@ -37,12 +43,19 @@ export function HeroSection({
           <h1 className="mt-4 max-w-3xl text-hero text-white">{title}</h1>
           <p className="mt-4 max-w-2xl text-body-lg text-white/90">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href={primaryAction.href} size="xl">
+            <ButtonLinkWithArrow
+              href={primaryAction.href}
+              size="xl"
+              showArrow={primaryAction.showArrow ?? true}>
               {primaryAction.label}
-            </ButtonLink>
-            <ButtonLink href={secondaryAction.href} variant="hero-outline" size="xl">
+            </ButtonLinkWithArrow>
+            <ButtonLinkWithArrow
+              href={secondaryAction.href}
+              variant="secondary"
+              size="xl"
+              showArrow={secondaryAction.showArrow ?? false}>
               {secondaryAction.label}
-            </ButtonLink>
+            </ButtonLinkWithArrow>
           </div>
         </div>
       </div>

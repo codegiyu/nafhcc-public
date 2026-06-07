@@ -1,4 +1,4 @@
-import { ButtonLink } from '@/components/ui/button-link';
+import { ButtonLinkWithArrow } from '@/components/ui/button-link-with-arrow';
 import { CtaBand } from '@/components/marketing/cta-band';
 import { EstateCard } from '@/components/marketing/cards/estate-card';
 import { ProcessStep } from '@/components/marketing/cards/process-step';
@@ -33,9 +33,13 @@ export function HomePageContent() {
         </div>
       </SiteSection>
 
-      <SiteSection className="bg-background py-16 md:py-20">
+      <SiteSection className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader title={content.estates.title} action={content.estates.action} />
+          <SectionHeader
+            overline={content.estates.overline}
+            title={content.estates.title}
+            action={content.estates.action}
+          />
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {content.estates.items.map(estate => (
               <EstateCard key={estate.href} {...estate} />
@@ -44,9 +48,10 @@ export function HomePageContent() {
         </div>
       </SiteSection>
 
-      <SiteSection id="services" className="bg-section-muted py-16 md:py-20">
+      <SiteSection id="services" className="bg-section-muted py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
           <SectionHeader
+            overline={content.services.overline}
             title={content.services.title}
             description={content.services.description}
             align="center"
@@ -59,9 +64,10 @@ export function HomePageContent() {
         </div>
       </SiteSection>
 
-      <SiteSection id="process" className="bg-background py-16 md:py-20">
+      <SiteSection id="process" className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
           <SectionHeader
+            overline={content.process.overline}
             title={content.process.title}
             description={content.process.description}
             align="center"
@@ -72,16 +78,22 @@ export function HomePageContent() {
             ))}
           </div>
           <div className="flex justify-center pt-4">
-            <ButtonLink href={content.process.cta.href} size="lg">
+            <ButtonLinkWithArrow
+              href={content.process.cta.href}
+              size="lg"
+              showArrow={content.process.cta.showArrow ?? true}>
               {content.process.cta.label}
-            </ButtonLink>
+            </ButtonLinkWithArrow>
           </div>
         </div>
       </SiteSection>
 
-      <SiteSection className="bg-section-muted py-16 md:py-20">
+      <SiteSection className="bg-section-muted py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader title={content.propertyTypes.title} />
+          <SectionHeader
+            overline={content.propertyTypes.overline}
+            title={content.propertyTypes.title}
+          />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {content.propertyTypes.items.map(type => (
               <PropertyTypeCard key={type.title} {...type} />
@@ -92,6 +104,7 @@ export function HomePageContent() {
 
       <CtaBand
         title={content.cta.title}
+        description={content.cta.description}
         primaryAction={content.cta.primaryAction}
         secondaryAction={content.cta.secondaryAction}
       />
