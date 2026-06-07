@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { SiteContainer } from '@/components/layout/site-container';
+import { createNotFoundMetadata } from '@/lib/seo/metadata';
+
+export const metadata = createNotFoundMetadata();
 
 export default function NotFoundPage() {
   return (
