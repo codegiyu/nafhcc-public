@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import './globals.css';
-import { Geist } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Providers } from '@/components/providers';
 import { AnalyticsProvider } from '@/components/analytics/analytics-provider';
@@ -9,7 +9,7 @@ import { JsonLd } from '@/components/seo/json-ld';
 import { createRootMetadata } from '@/lib/seo/metadata';
 import { Toaster } from '@/components/ui/sonner';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata = createRootMetadata();
 
@@ -19,7 +19,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={cn('font-sans', geist.variable)} suppressHydrationWarning>
+    <html lang="en" className={cn('font-sans', inter.variable)} suppressHydrationWarning>
       <body>
         <JsonLd />
         <Providers>
