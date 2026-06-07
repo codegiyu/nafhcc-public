@@ -24,7 +24,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
   const featuredEstates = getHomepageContent().estates.items;
 
   return (
-    <footer className={cn('bg-navy text-white', className)}>
+    <footer className={cn('bg-primary text-white', className)}>
       <div className="mx-auto grid max-w-container-wide gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="text-xl font-bold">NAFHCC</p>

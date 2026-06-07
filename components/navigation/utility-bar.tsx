@@ -10,7 +10,7 @@ type UtilityBarProps = {
 
 export function UtilityBar({ className }: UtilityBarProps) {
   return (
-    <div className={cn('bg-navy text-sm text-white/90', className)}>
+    <div className={cn('bg-primary text-sm text-white/90', className)}>
       <div className="mx-auto flex max-w-container-wide flex-wrap items-center justify-between gap-3 px-6 py-2">
         <div className="flex flex-wrap items-center gap-4">
           <a href={`tel:${siteContact.phone}`} className="hover:text-white">
