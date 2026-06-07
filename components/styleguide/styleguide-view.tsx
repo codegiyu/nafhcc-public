@@ -11,6 +11,7 @@ import { PropertyTypeCard } from '@/components/marketing/cards/property-type-car
 import { ServiceCard } from '@/components/marketing/cards/service-card';
 import { HeroSection } from '@/components/marketing/hero-section';
 import { OverlineBadge, SectionHeader } from '@/components/marketing/overline-badge';
+import { RegularInput, RegularSelect, RegularTextarea } from '@/components/forms';
 import { SearchBar } from '@/components/marketing/search-bar';
 import { StatsBar } from '@/components/marketing/stats-bar';
 import {
@@ -44,6 +45,7 @@ const buttonVariantsList = [
   'secondary',
   'ghost',
   'inverse',
+  'inverse-outline',
   'hero-outline',
   'link',
 ] as const;
@@ -202,8 +204,32 @@ export function StyleguideView() {
           <StyleguideSection
             id="forms"
             title="Forms"
-            description="Search bar with labeled selects.">
-            <SearchBar options={styleguideSearchOptions} action="/estates" />
+            description="Field wrappers, regular inputs, and the property search bar.">
+            <div className="space-y-8">
+              <StyleguidePreviewBox label="Regular input">
+                <RegularInput id="sg-name" label="Full name" placeholder="Enter your name" />
+              </StyleguidePreviewBox>
+              <StyleguidePreviewBox label="Regular select">
+                <RegularSelect
+                  id="sg-location"
+                  label="Location"
+                  value="Abuja"
+                  onValueChange={() => undefined}
+                  options={['Abuja', 'Enugu', 'Port Harcourt']}
+                />
+              </StyleguidePreviewBox>
+              <StyleguidePreviewBox label="Regular textarea with hint">
+                <RegularTextarea
+                  id="sg-message"
+                  label="Message"
+                  hint="Include your service number if applicable."
+                  rows={3}
+                />
+              </StyleguidePreviewBox>
+              <StyleguidePreviewBox label="Search bar">
+                <SearchBar options={styleguideSearchOptions} action="/estates" />
+              </StyleguidePreviewBox>
+            </div>
           </StyleguideSection>
 
           <StyleguideSection id="badges" title="Badges">
@@ -263,8 +289,9 @@ export function StyleguideView() {
             <div className="space-y-8">
               <StyleguidePreviewBox label="Section header">
                 <SectionHeader
+                  overline="FEATURED ESTATES"
                   title="NAFHCC Estates"
-                  action={{ label: 'View all estates', href: '/estates' }}
+                  action={{ label: 'View all estates', href: '/estates', showArrow: true }}
                 />
               </StyleguidePreviewBox>
               <StyleguidePreviewBox label="Stats bar">
@@ -275,9 +302,9 @@ export function StyleguideView() {
                   overline="Experience Quality Living"
                   title="Quality Housing Estates Across Nigeria"
                   description="Trusted residential estates, plots, and homes for the Nigerian Air Force community."
-                  primaryAction={{ label: 'Explore Estates', href: '/estates' }}
-                  secondaryAction={{ label: 'Contact Us', href: '/contact' }}
-                  imageUrl="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"
+                  primaryAction={{ label: 'Explore Estates', href: '/estates', showArrow: true }}
+                  secondaryAction={{ label: 'Contact Us', href: '/contact', showArrow: false }}
+                  imageUrl="/images/hero-estate.jpg"
                   imageAlt="Modern residential estate at dusk"
                   statsSlot={<StatsBar stats={styleguideStats} />}
                 />
@@ -285,8 +312,9 @@ export function StyleguideView() {
               <StyleguidePreviewBox label="CTA band" className="overflow-hidden p-0">
                 <CtaBand
                   title="Ready to find your home?"
-                  primaryAction={{ label: 'Apply Now', href: '/contact' }}
-                  secondaryAction={{ label: 'Contact Us', href: '/contact' }}
+                  description="Contact NAFHCC or apply for housing in any of our estates across Nigeria."
+                  primaryAction={{ label: 'Apply Now', href: '/contact', showArrow: true }}
+                  secondaryAction={{ label: 'Contact Us', href: '/contact', showArrow: false }}
                 />
               </StyleguidePreviewBox>
             </div>
