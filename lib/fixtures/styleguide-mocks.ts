@@ -30,7 +30,8 @@ export type StyleguideProcessStep = {
 export type StyleguidePropertyType = {
   title: string;
   subtitle: string;
-  icon: 'home' | 'building' | 'layers';
+  imageUrl: string;
+  imageAlt: string;
 };
 
 const homepage = getHomepageContent();

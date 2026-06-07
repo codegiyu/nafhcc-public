@@ -1,32 +1,35 @@
-import { Building2, Home, Layers, type LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import type { StyleguidePropertyType } from '@/lib/fixtures/styleguide-mocks';
 
-const iconMap: Record<StyleguidePropertyType['icon'], LucideIcon> = {
-  home: Home,
-  building: Building2,
-  layers: Layers,
-};
-
-type PropertyTypeCardProps = StyleguidePropertyType & {
+type PropertyTypeCardProps = {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  imageAlt: string;
   className?: string;
 };
 
-export function PropertyTypeCard({ title, subtitle, icon, className }: PropertyTypeCardProps) {
-  const Icon = iconMap[icon];
-
+export function PropertyTypeCard({
+  title,
+  subtitle,
+  imageUrl,
+  imageAlt,
+  className,
+}: PropertyTypeCardProps) {
   return (
     <article
-      className={cn(
-        'flex items-start gap-4 rounded-xl border border-border bg-card p-4 shadow-card',
-        className
-      )}>
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-        <Icon className="size-5" aria-hidden />
-      </div>
-      <div>
-        <h3 className="font-semibold text-foreground">{title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+      className={cn('relative aspect-[4/3] overflow-hidden rounded-xl shadow-card', className)}>
+      <Image
+        src={imageUrl}
+        alt={imageAlt}
+        fill
+        sizes="(max-width: 768px) 100vw, 25vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-4">
+        <h3 className="font-semibold text-white">{title}</h3>
+        <p className="mt-1 text-sm text-white/85">{subtitle}</p>
       </div>
     </article>
   );
