@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { ButtonLink } from '@/components/ui/button-link';
 import { cn } from '@/lib/utils';
 
 type CtaBandProps = {
@@ -19,13 +18,13 @@ export function CtaBand({ title, primaryAction, secondaryAction, className }: Ct
           {title}
         </h2>
         <div className="flex flex-wrap gap-3">
-          <Button variant="inverse" size="lg" render={<Link href={primaryAction.href} />}>
+          <ButtonLink href={primaryAction.href} variant="inverse" size="lg">
             {primaryAction.label}
-          </Button>
+          </ButtonLink>
           {secondaryAction ? (
-            <Button variant="hero-outline" size="lg" render={<Link href={secondaryAction.href} />}>
+            <ButtonLink href={secondaryAction.href} variant="hero-outline" size="lg">
               {secondaryAction.label}
-            </Button>
+            </ButtonLink>
           ) : null}
         </div>
       </div>

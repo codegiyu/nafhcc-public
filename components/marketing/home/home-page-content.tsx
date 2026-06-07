@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { ButtonLink } from '@/components/ui/button-link';
 import { CtaBand } from '@/components/marketing/cta-band';
 import { EstateCard } from '@/components/marketing/cards/estate-card';
 import { ProcessStep } from '@/components/marketing/cards/process-step';
@@ -73,9 +72,9 @@ export function HomePageContent() {
             ))}
           </div>
           <div className="flex justify-center pt-4">
-            <Button size="lg" render={<Link href={content.process.cta.href} />}>
+            <ButtonLink href={content.process.cta.href} size="lg">
               {content.process.cta.label}
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </SiteSection>

@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import { ReactNode } from 'react';
 import Image from 'next/image';
 import { OverlineBadge } from '@/components/marketing/overline-badge';
-import { Button } from '@/components/ui/button';
+import { ButtonLink } from '@/components/ui/button-link';
 import { cn } from '@/lib/utils';
 
 type HeroSectionProps = {
@@ -38,12 +37,12 @@ export function HeroSection({
           <h1 className="mt-4 max-w-3xl text-hero text-white">{title}</h1>
           <p className="mt-4 max-w-2xl text-body-lg text-white/90">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button size="xl" render={<Link href={primaryAction.href} />}>
+            <ButtonLink href={primaryAction.href} size="xl">
               {primaryAction.label}
-            </Button>
-            <Button variant="hero-outline" size="xl" render={<Link href={secondaryAction.href} />}>
+            </ButtonLink>
+            <ButtonLink href={secondaryAction.href} variant="hero-outline" size="xl">
               {secondaryAction.label}
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </div>

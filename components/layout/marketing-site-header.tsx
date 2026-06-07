@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { ButtonLink } from '@/components/ui/button-link';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { NavLink, UtilityBar } from '@/components/navigation/utility-bar';
 import { primaryNavigation } from '@/lib/site-navigation';
@@ -47,9 +48,9 @@ export function MarketingSiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button size="lg" className="hidden sm:inline-flex" render={<Link href="/contact" />}>
+            <ButtonLink href="/contact" size="lg" className="hidden sm:inline-flex">
               Apply Now
-            </Button>
+            </ButtonLink>
 
             <Sheet>
               <SheetTrigger
@@ -79,9 +80,9 @@ export function MarketingSiteHeader() {
                   ))}
                 </nav>
                 <div className="px-4 pb-4">
-                  <Button size="lg" className="w-full" render={<Link href="/contact" />}>
+                  <ButtonLink href="/contact" size="lg" className="w-full">
                     Apply Now
-                  </Button>
+                  </ButtonLink>
                 </div>
               </SheetContent>
             </Sheet>

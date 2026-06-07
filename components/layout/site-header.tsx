@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { ButtonLink } from '@/components/ui/button-link';
 import { NavLink, UtilityBar } from '@/components/navigation/utility-bar';
 import { cn } from '@/lib/utils';
 
@@ -32,9 +32,9 @@ export function SiteHeader({ navigation, activePath = '/', className }: SiteHead
               </NavLink>
             ))}
           </nav>
-          <Button size="lg" render={<Link href="/contact" />}>
+          <ButtonLink href="/contact" size="lg">
             Apply Now
-          </Button>
+          </ButtonLink>
         </div>
       </div>
     </header>

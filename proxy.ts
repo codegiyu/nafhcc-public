@@ -47,7 +47,7 @@ async function handleStyleguide(request: NextRequest): Promise<NextResponse> {
   return new NextResponse(null, { status: 404 });
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith(STYLEGUIDE_PATH)) {
     return handleStyleguide(request);
   }
