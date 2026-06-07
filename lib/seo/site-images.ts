@@ -31,10 +31,10 @@ const placeholderImages = {
     alt: 'NAFHCC app icon',
   },
   hero: {
-    url: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80',
+    url: '/images/hero-estate.jpg',
     width: 1920,
     height: 1080,
-    alt: 'Modern residential estate — placeholder',
+    alt: 'NAFHCC residential estate — quality housing across Nigeria',
   },
 } as const satisfies Record<string, SiteImage>;
 
