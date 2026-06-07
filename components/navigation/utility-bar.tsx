@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { styleguideContact } from '@/lib/fixtures/styleguide-mocks';
+import { siteContact } from '@/lib/content/contact';
 import { SocialLinks } from '@/components/navigation/social-links';
 
 type UtilityBarProps = {
@@ -13,11 +13,11 @@ export function UtilityBar({ className }: UtilityBarProps) {
     <div className={cn('bg-navy text-sm text-white/90', className)}>
       <div className="mx-auto flex max-w-container-wide flex-wrap items-center justify-between gap-3 px-6 py-2">
         <div className="flex flex-wrap items-center gap-4">
-          <a href={`tel:${styleguideContact.phone}`} className="hover:text-white">
-            {styleguideContact.phone}
+          <a href={`tel:${siteContact.phone}`} className="hover:text-white">
+            {siteContact.phone}
           </a>
-          <a href={`mailto:${styleguideContact.email}`} className="hover:text-white">
-            {styleguideContact.email}
+          <a href={`mailto:${siteContact.email}`} className="hover:text-white">
+            {siteContact.email}
           </a>
         </div>
         <SocialLinks variant="utility" />

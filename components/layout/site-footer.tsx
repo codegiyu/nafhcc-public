@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import { FooterLink } from '@/components/navigation/utility-bar';
 import { SocialLinks } from '@/components/navigation/social-links';
-import { styleguideContact, styleguideEstates } from '@/lib/fixtures/styleguide-mocks';
+import { siteContact } from '@/lib/content/contact';
+import { getHomepageContent } from '@/lib/content/homepage';
 import { footerQuickLinks } from '@/lib/site-navigation';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +21,8 @@ export function SiteFooterColumn({ title, children }: { title: string; children:
 }
 
 export function SiteFooter({ className }: SiteFooterProps) {
+  const featuredEstates = getHomepageContent().estates.items;
+
   return (
     <footer className={cn('bg-navy text-white', className)}>
       <div className="mx-auto grid max-w-container-wide gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-4">
@@ -40,23 +43,23 @@ export function SiteFooter({ className }: SiteFooterProps) {
         <SiteFooterColumn title="Contact">
           <p className="flex items-start gap-2 text-sm text-white/75">
             <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
-            {styleguideContact.address}
+            {siteContact.address}
           </p>
           <p className="flex items-center gap-2 text-sm text-white/75">
             <Phone className="size-4 shrink-0" aria-hidden />
-            <a href={`tel:${styleguideContact.phone}`} className="hover:text-white">
-              {styleguideContact.phone}
+            <a href={`tel:${siteContact.phone}`} className="hover:text-white">
+              {siteContact.phone}
             </a>
           </p>
           <p className="flex items-center gap-2 text-sm text-white/75">
             <Mail className="size-4 shrink-0" aria-hidden />
-            <a href={`mailto:${styleguideContact.email}`} className="hover:text-white">
-              {styleguideContact.email}
+            <a href={`mailto:${siteContact.email}`} className="hover:text-white">
+              {siteContact.email}
             </a>
           </p>
         </SiteFooterColumn>
         <SiteFooterColumn title="Featured Estates">
-          {styleguideEstates.map(estate => (
+          {featuredEstates.map(estate => (
             <FooterLink key={estate.href} href={estate.href}>
               {estate.title}
             </FooterLink>
