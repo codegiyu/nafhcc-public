@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import './globals.css';
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { Geist } from 'next/font/google';
+import { cn } from '@/lib/utils';
+import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/sonner';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'NAFHCC Public',
@@ -19,12 +19,12 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" className={cn('font-sans', geist.variable)} suppressHydrationWarning>
       <body>
-        <TooltipProvider>
+        <Providers>
           {children}
           <Toaster />
-        </TooltipProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -2,16 +2,16 @@
   "folders": [
     {
       "name": "nafhcc-public",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "nafhcc-admin",
-      "path": "../nafhcc-admin"
+      "path": "../nafhcc-admin",
     },
     {
       "name": "nafhcc-backend",
-      "path": "../nafhcc-backend"
-    }
+      "path": "../nafhcc-backend",
+    },
   ],
-  "settings": {}
+  "settings": {},
 }
