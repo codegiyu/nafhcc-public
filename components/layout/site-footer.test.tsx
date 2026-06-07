@@ -16,13 +16,13 @@ vi.mock('@/lib/content/homepage', () => ({
 }));
 
 describe('SiteFooter', () => {
-  it('renders footer landmark with quick links and featured estates', () => {
+  it('renders footer landmark with stacked quick links and featured estates', () => {
     render(<SiteFooter />);
 
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(screen.getByText('Quick Links')).toBeInTheDocument();
     expect(screen.getByText('Featured Estates')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Gallery' })).toHaveAttribute('href', '/gallery');
+    expect(screen.getByRole('link', { name: 'Gallery' })).toHaveClass('block');
     expect(screen.getByRole('link', { name: 'NAF Valley Estate, Asokoro' })).toHaveAttribute(
       'href',
       '/estates/naf-valley-estate-asokoro'

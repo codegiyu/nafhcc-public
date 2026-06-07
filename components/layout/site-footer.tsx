@@ -40,6 +40,13 @@ export function SiteFooter({ className }: SiteFooterProps) {
             </FooterLink>
           ))}
         </SiteFooterColumn>
+        <SiteFooterColumn title="Featured Estates">
+          {featuredEstates.map(estate => (
+            <FooterLink key={estate.href} href={estate.href}>
+              {estate.title}
+            </FooterLink>
+          ))}
+        </SiteFooterColumn>
         <SiteFooterColumn title="Contact">
           <p className="flex items-start gap-2 text-sm text-white/75">
             <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
@@ -57,13 +64,6 @@ export function SiteFooter({ className }: SiteFooterProps) {
               {siteContact.email}
             </a>
           </p>
-        </SiteFooterColumn>
-        <SiteFooterColumn title="Featured Estates">
-          {featuredEstates.map(estate => (
-            <FooterLink key={estate.href} href={estate.href}>
-              {estate.title}
-            </FooterLink>
-          ))}
         </SiteFooterColumn>
       </div>
       <div className="border-t border-white/10">
