@@ -7,23 +7,20 @@ import { Button } from '@/components/ui/button';
 import { ButtonLink } from '@/components/ui/button-link';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { NavLink, UtilityBar } from '@/components/navigation/utility-bar';
+import {
+  resolveMarketingNavActive,
+  useMarketingNavScrollspy,
+} from '@/lib/hooks/use-marketing-nav-scrollspy';
 import { primaryNavigation } from '@/lib/site-navigation';
-
-function isNavItemActive(pathname: string, href: string): boolean {
-  if (href === '/') {
-    return pathname === '/';
-  }
-
-  if (href.startsWith('/#')) {
-    return pathname === '/';
-  }
-
-  const basePath = href.split('#')[0] ?? href;
-  return pathname === basePath || pathname.startsWith(`${basePath}/`);
-}
 
 export function MarketingSiteHeader() {
   const pathname = usePathname();
+  const isHomepage = pathname === '/';
+  const activeSection = useMarketingNavScrollspy(isHomepage);
+
+  function isNavItemActive(href: string): boolean {
+    return resolveMarketingNavActive(pathname, href, activeSection);
+  }
 
   return (
     <>
@@ -39,10 +36,7 @@ export function MarketingSiteHeader() {
 
             <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
               {primaryNavigation.map(item => (
-                <NavLink
-                  key={item.href}
-                  href={item.href}
-                  isActive={isNavItemActive(pathname, item.href)}>
+                <NavLink key={item.href} href={item.href} isActive={isNavItemActive(item.href)}>
                   {item.label}
                 </NavLink>
               ))}
@@ -74,7 +68,7 @@ export function MarketingSiteHeader() {
                       <NavLink
                         key={item.href}
                         href={item.href}
-                        isActive={isNavItemActive(pathname, item.href)}
+                        isActive={isNavItemActive(item.href)}
                         className="block py-3">
                         {item.label}
                       </NavLink>

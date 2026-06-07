@@ -16,4 +16,11 @@ describe('MarketingSiteHeader', () => {
     expect(screen.getByRole('button', { name: 'Open menu' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Apply Now' })).toHaveAttribute('href', '/contact');
   });
+
+  it('does not mark services link active on homepage by default', () => {
+    render(<MarketingSiteHeader />);
+
+    const servicesLinks = screen.getAllByRole('link', { name: 'Services' });
+    expect(servicesLinks[0]).not.toHaveAttribute('aria-current', 'page');
+  });
 });

@@ -40,7 +40,7 @@ export function NavLink({ href, children, isActive, className }: NavLinkProps) {
       aria-current={isActive ? 'page' : undefined}
       className={cn(
         'rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-        isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary',
+        isActive ? 'text-primary' : 'text-foreground hover:text-primary',
         className
       )}>
       {children}
@@ -59,7 +59,7 @@ export function FooterLink({ href, children, className }: FooterLinkProps) {
     <Link
       href={href}
       className={cn(
-        'text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50',
+        'text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 block',
         className
       )}>
       {children}
