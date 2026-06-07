@@ -22,7 +22,7 @@ export function CtaBand({ title, primaryAction, secondaryAction, className }: Ct
             {primaryAction.label}
           </ButtonLink>
           {secondaryAction ? (
-            <ButtonLink href={secondaryAction.href} variant="hero-outline" size="lg">
+            <ButtonLink href={secondaryAction.href} variant="secondary" size="lg">
               {secondaryAction.label}
             </ButtonLink>
           ) : null}
