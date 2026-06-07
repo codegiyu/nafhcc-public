@@ -1,0 +1,14 @@
+# NAFHCC — Nigerian Air Force Housing and Construction Company Ltd
+
+> Quality residential estates, plots, and homes across Abuja and Nigeria.
+
+## Key pages
+- Home: /
+- Estates (planned): /estates
+- Contact (planned): /contact
+- About (planned): /about
+
+## Contact
+- Phone: 09087069086
+- Email: info@nafhcc.com
+- Address: 156 Aminu Kano Crescent, Wuse II, Abuja
