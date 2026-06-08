@@ -48,7 +48,7 @@ export function SearchBar({ options, action = '/estates', className }: SearchBar
     <form
       onSubmit={handleSubmit}
       className={cn(
-        'flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-card lg:flex-row lg:items-end',
+        'flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-card lg:flex-row',
         className
       )}>
       <fieldset className="grid flex-1 gap-4 sm:grid-cols-3">
@@ -78,7 +78,7 @@ export function SearchBar({ options, action = '/estates', className }: SearchBar
           size="lg"
         />
       </fieldset>
-      <InputWrapper label="Search" htmlFor="search-submit" hideLabel>
+      <InputWrapper>
         <Button id="search-submit" type="submit" size="lg" className="h-11 w-full lg:w-auto">
           <Search aria-hidden />
           Search Properties

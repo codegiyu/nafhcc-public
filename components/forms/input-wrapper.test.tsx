@@ -39,6 +39,16 @@ describe('InputWrapper', () => {
     expect(screen.queryByText('Include country code.')).not.toBeInTheDocument();
   });
 
+  it('reserves label space when no label is provided', () => {
+    render(
+      <InputWrapper>
+        <Input id="search" />
+      </InputWrapper>
+    );
+
+    expect(screen.getByText('\u200b')).toHaveClass('invisible');
+  });
+
   it('hides label visually when hideLabel is set', () => {
     render(
       <InputWrapper label="Search" htmlFor="search" hideLabel>

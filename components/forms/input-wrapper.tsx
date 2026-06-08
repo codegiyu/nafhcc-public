@@ -3,8 +3,8 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 
 export type InputWrapperProps = {
-  label: ReactNode;
-  htmlFor: string;
+  label?: ReactNode;
+  htmlFor?: string;
   fieldError?: string;
   helpText?: string;
   required?: boolean;
@@ -12,6 +12,14 @@ export type InputWrapperProps = {
   className?: string;
   children: ReactNode;
 };
+
+function LabelSpacer() {
+  return (
+    <span className="block text-sm leading-none font-medium invisible select-none" aria-hidden>
+      &#8203;
+    </span>
+  );
+}
 
 export function InputWrapper({
   label,
@@ -38,14 +46,18 @@ export function InputWrapper({
 
   return (
     <div className={cn('space-y-2', className)}>
-      <Label
-        htmlFor={htmlFor}
-        className={cn(
-          hideLabel && 'sr-only',
-          required && "after:ml-0.5 after:text-destructive after:content-['*']"
-        )}>
-        {label}
-      </Label>
+      {label !== undefined ? (
+        <Label
+          htmlFor={htmlFor}
+          className={cn(
+            hideLabel && 'sr-only',
+            required && "after:ml-0.5 after:text-destructive after:content-['*']"
+          )}>
+          {label}
+        </Label>
+      ) : (
+        <LabelSpacer />
+      )}
       {control}
       {fieldError ? (
         <p id={errorId} role="alert" className="text-sm text-destructive">
