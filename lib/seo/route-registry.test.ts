@@ -4,7 +4,7 @@ import { getLiveRoutes, routeRegistry } from '@/lib/seo/route-registry';
 describe('route-registry', () => {
   it('marks homepage and search as live routes', () => {
     const live = getLiveRoutes();
-    expect(live.map(route => route.path)).toEqual(['/', '/search']);
+    expect(live.map(route => route.path)).toEqual(['/', '/contact', '/search']);
   });
 
   it('assigns valid priority and changefreq to all routes', () => {

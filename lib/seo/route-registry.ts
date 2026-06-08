@@ -22,7 +22,7 @@ export type RouteEntry = {
 
 const staticPlannedRoutes: RouteEntry[] = [
   { path: '/about', status: 'planned', changefreq: 'monthly', priority: 0.7 },
-  { path: '/contact', status: 'planned', changefreq: 'monthly', priority: 0.7 },
+  { path: '/contact', status: 'live', changefreq: 'monthly', priority: 0.7 },
   { path: '/estates', status: 'planned', changefreq: 'weekly', priority: 0.9 },
   { path: '/gallery', status: 'planned', changefreq: 'weekly', priority: 0.6 },
   { path: '/blog', status: 'planned', changefreq: 'weekly', priority: 0.6 },
