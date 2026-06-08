@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from 'react';
 
-export type MarketingNavSectionId = 'home' | 'services' | 'process';
+export type MarketingNavSectionId = 'home' | 'about' | 'estates' | 'services' | 'process';
 
-const SECTION_IDS = ['services', 'process'] as const;
+const SECTION_IDS = ['about', 'estates', 'services', 'process'] as const;
+
+type ObservedSectionId = (typeof SECTION_IDS)[number];
+
+function isObservedSectionId(id: string): id is ObservedSectionId {
+  return SECTION_IDS.includes(id as ObservedSectionId);
+}
 
 export function useMarketingNavScrollspy(enabled: boolean) {
   const [activeSection, setActiveSection] = useState<MarketingNavSectionId>('home');
@@ -28,8 +34,10 @@ export function useMarketingNavScrollspy(enabled: boolean) {
           .filter(entry => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible[0]?.target.id === 'services' || visible[0]?.target.id === 'process') {
-          setActiveSection(visible[0].target.id);
+        const topSectionId = visible[0]?.target.id;
+
+        if (topSectionId && isObservedSectionId(topSectionId)) {
+          setActiveSection(topSectionId);
           return;
         }
 
@@ -68,6 +76,14 @@ export function resolveMarketingNavActive(
 ): boolean {
   if (href === '/') {
     return pathname === '/' && activeSection === 'home';
+  }
+
+  if (href === '/#about') {
+    return pathname === '/' && activeSection === 'about';
+  }
+
+  if (href === '/#estates') {
+    return pathname === '/' && activeSection === 'estates';
   }
 
   if (href === '/#services') {

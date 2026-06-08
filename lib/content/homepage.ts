@@ -61,6 +61,10 @@ export type HomepageContent = {
     types: string[];
     prices: string[];
   };
+  about: HomepageSection & {
+    imageUrl: string;
+    imageAlt: string;
+  };
   estates: HomepageSection & {
     action: HomepageAction;
     items: HomepageEstate[];
@@ -103,6 +107,14 @@ const homepageContent: HomepageContent = {
     locations: ['All Locations', 'Abuja', 'Enugu', 'Port Harcourt', 'Kaduna'],
     types: ['All Types', 'Plots', 'Houses', 'Duplex', 'Bungalow'],
     prices: ['Any Price', 'Under ₦10M', '₦10M – ₦30M', '₦30M+'],
+  },
+  about: {
+    overline: 'ABOUT NAFHCC',
+    title: 'Trusted housing for the NAF community',
+    description:
+      'The Nigerian Air Force Housing and Construction Company Ltd (NAFHCC) is a subsidiary of the Nigerian Air Force Holding Company. Our mission is to provide affordable, decently finished, and accessible post-service homes for Nigerian Air Force personnel. About 40% of homes built are also available for purchase by the general public, with personnel of other armed forces and para-military services eligible on a first-come-first-served basis.',
+    imageUrl: '/images/hero-estate.jpg',
+    imageAlt: 'NAFHCC residential estate development',
   },
   estates: {
     overline: 'FEATURED ESTATES',
@@ -242,6 +254,14 @@ export function validateHomepageContent(content: HomepageContent): string[] {
 
   if (content.stats.length < 1) {
     errors.push('stats must include at least one item');
+  }
+
+  if (!content.about.title.trim()) {
+    errors.push('about.title is required');
+  }
+
+  if (!content.about.imageUrl.trim()) {
+    errors.push('about.imageUrl is required');
   }
 
   if (content.estates.items.length < 1) {

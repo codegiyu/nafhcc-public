@@ -4,6 +4,7 @@ import { EstateCard } from '@/components/marketing/cards/estate-card';
 import { ProcessStep } from '@/components/marketing/cards/process-step';
 import { PropertyTypeCard } from '@/components/marketing/cards/property-type-card';
 import { ServiceCard } from '@/components/marketing/cards/service-card';
+import { AboutSection } from '@/components/marketing/home/about-section';
 import { HeroSection } from '@/components/marketing/hero-section';
 import { SectionHeader } from '@/components/marketing/overline-badge';
 import { SearchBar } from '@/components/marketing/search-bar';
@@ -33,7 +34,9 @@ export function HomePageContent() {
         </div>
       </SiteSection>
 
-      <SiteSection className="bg-background py-20 md:py-24">
+      <AboutSection content={content.about} />
+
+      <SiteSection id="estates" className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
           <SectionHeader
             overline={content.estates.overline}

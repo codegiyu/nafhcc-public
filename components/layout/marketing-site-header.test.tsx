@@ -12,7 +12,8 @@ describe('MarketingSiteHeader', () => {
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: 'Primary' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Estates' })).toHaveAttribute('href', '/estates');
+    expect(screen.getByRole('link', { name: 'Estates' })).toHaveAttribute('href', '/#estates');
+    expect(screen.getByRole('link', { name: 'About Us' })).toHaveAttribute('href', '/#about');
     expect(screen.getByRole('button', { name: 'Open menu' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Apply Now' })).toHaveAttribute('href', '/contact');
   });

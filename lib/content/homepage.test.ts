@@ -11,6 +11,8 @@ describe('homepage content', () => {
     const content = getHomepageContent();
 
     expect(content.hero.title).toContain('Quality Housing');
+    expect(content.about.overline).toBe('ABOUT NAFHCC');
+    expect(content.about.title).toContain('Trusted housing');
     expect(content.estates.overline).toBe('FEATURED ESTATES');
     expect(content.services.overline).toBe('WHAT WE DO');
     expect(content.process.overline).toBe('OUR PROCESS');

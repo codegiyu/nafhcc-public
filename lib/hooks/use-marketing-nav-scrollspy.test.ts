@@ -8,6 +8,8 @@ describe('resolveMarketingNavActive', () => {
   });
 
   it('marks hash nav items active when their section is in view', () => {
+    expect(resolveMarketingNavActive('/', '/#about', 'about')).toBe(true);
+    expect(resolveMarketingNavActive('/', '/#estates', 'estates')).toBe(true);
     expect(resolveMarketingNavActive('/', '/#services', 'services')).toBe(true);
     expect(resolveMarketingNavActive('/', '/#process', 'process')).toBe(true);
     expect(resolveMarketingNavActive('/', '/#services', 'home')).toBe(false);
