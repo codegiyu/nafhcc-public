@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { Mail, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { siteContact } from '@/lib/content/contact';
 import { SocialLinks } from '@/components/navigation/social-links';
@@ -13,10 +14,16 @@ export function UtilityBar({ className }: UtilityBarProps) {
     <div className={cn('bg-primary text-sm text-white/90', className)}>
       <div className="mx-auto flex max-w-container-wide flex-wrap items-center justify-between gap-3 px-6 py-2">
         <div className="flex flex-wrap items-center gap-4">
-          <a href={`tel:${siteContact.phone}`} className="hover:text-white">
+          <a
+            href={`tel:${siteContact.phone}`}
+            className="inline-flex items-center gap-1.5 hover:text-white">
+            <Phone className="size-4 shrink-0" aria-hidden />
             {siteContact.phone}
           </a>
-          <a href={`mailto:${siteContact.email}`} className="hover:text-white">
+          <a
+            href={`mailto:${siteContact.email}`}
+            className="inline-flex items-center gap-1.5 hover:text-white">
+            <Mail className="size-4 shrink-0" aria-hidden />
             {siteContact.email}
           </a>
         </div>

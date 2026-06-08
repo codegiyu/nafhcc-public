@@ -48,7 +48,7 @@ export function CtaBand({
           {secondaryAction ? (
             <ButtonLinkWithArrow
               href={secondaryAction.href}
-              variant="inverse-outline"
+              variant="secondary"
               size="lg"
               showArrow={secondaryAction.showArrow ?? false}>
               {secondaryAction.label}
