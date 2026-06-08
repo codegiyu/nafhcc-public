@@ -17,7 +17,11 @@ export function ContactInfoCard({ icon, title, lines, className }: ContactInfoCa
   const Icon = iconMap[icon];
 
   return (
-    <article className={cn('rounded-xl border border-border bg-card p-6 shadow-card', className)}>
+    <article
+      className={cn(
+        'flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-card',
+        className
+      )}>
       <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
         <Icon className="size-5" aria-hidden />
       </div>

@@ -39,8 +39,8 @@ export function HeroSection({
 }: HeroSectionProps) {
   const isCompact = size === 'compact';
   const isCentered = align === 'center';
-  const minHeightClass = isCompact ? 'min-h-[min(42vh,22rem)]' : 'min-h-[min(85vh,50rem)]';
-  const paddingClass = isCompact ? 'py-14 md:py-16' : 'py-20 md:py-28';
+  const minHeightClass = isCompact ? 'min-h-[min(63vh,33rem)]' : 'min-h-[min(85vh,50rem)]';
+  const paddingClass = isCompact ? 'py-16 md:py-20' : 'py-20 md:py-28';
   const showActions = primaryAction && secondaryAction;
 
   return (
@@ -55,17 +55,11 @@ export function HeroSection({
             paddingClass,
             isCentered && 'items-center text-center'
           )}>
-          <OverlineBadge variant="overline">{overline}</OverlineBadge>
-          <h1 className={cn('mt-4 text-hero text-white', isCentered ? 'max-w-4xl' : 'max-w-3xl')}>
-            {title}
-          </h1>
-          <p
-            className={cn(
-              'mt-4 text-body-lg text-white/90',
-              isCentered ? 'max-w-3xl' : 'max-w-2xl'
-            )}>
-            {description}
-          </p>
+          <div className={cn('w-full', isCentered && 'mx-auto max-w-3xl')}>
+            <OverlineBadge variant="overline">{overline}</OverlineBadge>
+            <h1 className="mt-4 max-w-3xl text-hero text-white">{title}</h1>
+            <p className="mt-4 max-w-2xl text-body-lg text-white/90">{description}</p>
+          </div>
           {showActions ? (
             <div className={cn('mt-8 flex flex-wrap gap-3', isCentered && 'justify-center')}>
               <ButtonLinkWithArrow

@@ -7,7 +7,13 @@ import { RegularInput } from '@/components/forms/regular-input';
 import { RegularSelect } from '@/components/forms/regular-select';
 import { RegularTextarea } from '@/components/forms/regular-textarea';
 import { Button } from '@/components/ui/button';
-import { CONTACT_SUBJECTS, type ContactFormInput } from '@/lib/contact/schema';
+import { sanitizePhoneInput } from '@/lib/contact/phone';
+import {
+  CONTACT_SUBJECTS,
+  getContactFieldError,
+  isContactFormValid,
+  type ContactFormInput,
+} from '@/lib/contact/schema';
 import { cn } from '@/lib/utils';
 
 type ContactFormProps = {
@@ -31,6 +37,39 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const canSubmit = isContactFormValid(values);
+
+  function setFieldError(field: keyof ContactFormInput, message?: string) {
+    setFieldErrors(current => {
+      const next = { ...current };
+
+      if (message) {
+        next[field] = message;
+      } else {
+        delete next[field];
+      }
+
+      return next;
+    });
+  }
+
+  function validateFieldOnBlur(field: keyof ContactFormInput, nextValues: FormState = values) {
+    const message = getContactFieldError(field, nextValues);
+    setFieldError(field, message);
+  }
+
+  function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
+    setValues(current => {
+      const nextValues = { ...current, [field]: value };
+
+      if (fieldErrors[field]) {
+        const message = getContactFieldError(field, nextValues);
+        setFieldError(field, message);
+      }
+
+      return nextValues;
+    });
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -86,9 +125,8 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
             required
             size="lg"
             value={values.firstName}
-            onChange={event =>
-              setValues(current => ({ ...current, firstName: event.target.value }))
-            }
+            onChange={event => updateField('firstName', event.target.value)}
+            onBlur={() => validateFieldOnBlur('firstName')}
             errorMessage={fieldErrors.firstName}
           />
           <RegularInput
@@ -100,7 +138,8 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
             required
             size="lg"
             value={values.lastName}
-            onChange={event => setValues(current => ({ ...current, lastName: event.target.value }))}
+            onChange={event => updateField('lastName', event.target.value)}
+            onBlur={() => validateFieldOnBlur('lastName')}
             errorMessage={fieldErrors.lastName}
           />
         </div>
@@ -116,7 +155,8 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
             required
             size="lg"
             value={values.email}
-            onChange={event => setValues(current => ({ ...current, email: event.target.value }))}
+            onChange={event => updateField('email', event.target.value)}
+            onBlur={() => validateFieldOnBlur('email')}
             errorMessage={fieldErrors.email}
           />
           <RegularInput
@@ -124,12 +164,14 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
             label="Phone"
             name="phone"
             type="tel"
+            inputMode="tel"
             autoComplete="tel"
             placeholder="0800 000 0000"
             required
             size="lg"
             value={values.phone}
-            onChange={event => setValues(current => ({ ...current, phone: event.target.value }))}
+            onChange={event => updateField('phone', sanitizePhoneInput(event.target.value))}
+            onBlur={() => validateFieldOnBlur('phone')}
             errorMessage={fieldErrors.phone}
           />
         </div>
@@ -138,12 +180,19 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
           id="contact-subject"
           label="Subject"
           value={values.subject}
-          onValueChange={subject =>
-            setValues(current => ({
-              ...current,
+          onValueChange={subject => {
+            const nextValues = {
+              ...values,
               subject: subject as ContactFormInput['subject'],
-            }))
-          }
+            };
+
+            setValues(nextValues);
+
+            if (fieldErrors.subject) {
+              validateFieldOnBlur('subject', nextValues);
+            }
+          }}
+          onBlur={() => validateFieldOnBlur('subject')}
           options={subjectOptions}
           required
           size="lg"
@@ -158,7 +207,8 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
           rows={6}
           required
           value={values.message}
-          onChange={event => setValues(current => ({ ...current, message: event.target.value }))}
+          onChange={event => updateField('message', event.target.value)}
+          onBlur={() => validateFieldOnBlur('message')}
           errorMessage={fieldErrors.message}
         />
 
@@ -168,7 +218,7 @@ export function ContactForm({ subjectOptions, className }: ContactFormProps) {
           </p>
         ) : null}
 
-        <Button type="submit" size="lg" disabled={isSubmitting}>
+        <Button type="submit" size="lg" disabled={isSubmitting || !canSubmit}>
           <Send aria-hidden />
           {isSubmitting ? 'Sending…' : 'Send Message'}
         </Button>

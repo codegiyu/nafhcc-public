@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { ContactPageContent } from '@/components/marketing/contact/contact-page-content';
@@ -7,7 +8,7 @@ vi.mock('next/image', () => ({
 }));
 
 describe('ContactPageContent', () => {
-  it('renders hero, info cards, form, and CTA band', () => {
+  it('renders hero, info cards, and form', () => {
     render(<ContactPageContent />);
 
     expect(screen.getByRole('heading', { name: /Get in touch with NAFHCC/i })).toBeInTheDocument();
@@ -19,6 +20,5 @@ describe('ContactPageContent', () => {
       screen.getByRole('heading', { name: /Let's start a conversation/i })
     ).toBeInTheDocument();
     expect(screen.getByRole('form', { name: 'Contact form' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Ready to find your home/i })).toBeInTheDocument();
   });
 });

@@ -19,7 +19,6 @@ describe('contact page content', () => {
     expect(content.formSection.overline).toBe('SEND A MESSAGE');
     expect(content.formSection.title).toContain('conversation');
     expect(content.subjectOptions).toContain('Housing Application Inquiry');
-    expect(content.cta.title).toContain('Ready to find your home');
   });
 
   it('uses legacy site contact values in cards and quick contacts', () => {

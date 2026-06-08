@@ -37,7 +37,7 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
   return (
     <SiteSection id="about" className="bg-section-muted py-20 md:py-24">
       <div className="mx-auto grid max-w-container-wide items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16">
-        <FadeInUp className="relative pb-8 lg:pb-0">
+        <FadeInUp className="relative pb-8 lg:pb-0 overflow-visible">
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border shadow-card">
             <Image
               src={content.imageUrl}

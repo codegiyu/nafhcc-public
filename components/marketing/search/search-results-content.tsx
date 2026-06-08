@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { PropertyResultCard } from '@/components/marketing/cards/property-result-card';
+import { CtaBand } from '@/components/marketing/cta-band';
 import { SearchBar } from '@/components/marketing/search-bar';
 import { SearchResultsPagination } from '@/components/marketing/search/search-results-pagination';
 import { SearchResultsToolbar } from '@/components/marketing/search/search-results-toolbar';
@@ -40,34 +41,43 @@ export function SearchResultsContent() {
   const pagination = <SearchResultsPagination meta={meta} filters={filters} action="/search" />;
 
   return (
-    <SiteSection className="bg-background py-12 md:py-16">
-      <div className="mx-auto max-w-container-wide space-y-8 px-6">
-        <div className="space-y-3">
-          <h1 className="text-h2 text-foreground">Search Properties</h1>
-          <p className="text-body-lg text-muted-foreground">{buildResultsHeading(filters)}</p>
+    <>
+      <SiteSection className="bg-background py-12 md:py-16">
+        <div className="mx-auto max-w-container-wide space-y-8 px-6">
+          <div className="space-y-3">
+            <h1 className="text-h2 text-foreground">Search Properties</h1>
+            <p className="text-body-lg text-muted-foreground">{buildResultsHeading(filters)}</p>
+          </div>
+
+          <SearchBar
+            key={`${location ?? ''}-${type ?? ''}-${price ?? ''}`}
+            options={content.search}
+            defaultValues={filters}
+            action="/search"
+          />
+
+          <SearchResultsToolbar meta={meta} pagination={pagination} />
+
+          <StaggerInView
+            contentKey={resultsContentKey}
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {visibleResults.map(result => (
+              <StaggerItem key={result.id}>
+                <PropertyResultCard {...result} />
+              </StaggerItem>
+            ))}
+          </StaggerInView>
+
+          <SearchResultsToolbar meta={meta} pagination={pagination} />
         </div>
+      </SiteSection>
 
-        <SearchBar
-          key={`${location ?? ''}-${type ?? ''}-${price ?? ''}`}
-          options={content.search}
-          defaultValues={filters}
-          action="/search"
-        />
-
-        <SearchResultsToolbar meta={meta} pagination={pagination} />
-
-        <StaggerInView
-          contentKey={resultsContentKey}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {visibleResults.map(result => (
-            <StaggerItem key={result.id}>
-              <PropertyResultCard {...result} />
-            </StaggerItem>
-          ))}
-        </StaggerInView>
-
-        <SearchResultsToolbar meta={meta} pagination={pagination} />
-      </div>
-    </SiteSection>
+      <CtaBand
+        title={content.cta.title}
+        description={content.cta.description}
+        primaryAction={content.cta.primaryAction}
+        secondaryAction={content.cta.secondaryAction}
+      />
+    </>
   );
 }

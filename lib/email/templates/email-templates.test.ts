@@ -36,6 +36,6 @@ describe('email templates', () => {
     expect(email.html).toContain('What happens next?');
     expect(email.html).toContain('24 hours');
     expect(email.html).toContain(getSenderConfirmationCeoName());
-    expect(email.html).toContain('Managing Director / CEO');
+    expect(email.html).toContain('Managing Director, NAFHCC');
   });
 });

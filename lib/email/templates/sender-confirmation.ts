@@ -3,8 +3,8 @@ import { siteContact } from '@/lib/content/contact';
 import { siteConfig } from '@/lib/seo/site-config';
 import { emailLayout, escapeHtml } from '@/lib/email/templates/shared/layout';
 
-const CEO_NAME = 'AVM I. S. Adamu';
-const CEO_TITLE = 'Managing Director / CEO, NAFHCC';
+const CEO_NAME = 'AVM S. Peter';
+const CEO_TITLE = 'Managing Director, NAFHCC';
 
 export function buildSenderConfirmationEmail(submission: ContactFormInput): {
   subject: string;

@@ -25,6 +25,7 @@ type RegularSelectProps = {
   disabled?: boolean;
   hideLabel?: boolean;
   className?: string;
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
 };
 
 function normalizeOption(option: SelectOption) {
@@ -49,6 +50,7 @@ export function RegularSelect({
   disabled,
   hideLabel,
   className,
+  onBlur,
 }: RegularSelectProps) {
   return (
     <InputWrapper
@@ -60,7 +62,7 @@ export function RegularSelect({
       hideLabel={hideLabel}
       className={className}>
       <Select value={value} onValueChange={next => next && onValueChange(next)} disabled={disabled}>
-        <SelectTrigger id={id} size={size} className="w-full">
+        <SelectTrigger id={id} size={size} className="w-full" onBlur={onBlur}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>

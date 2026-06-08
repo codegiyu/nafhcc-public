@@ -67,9 +67,9 @@ export function HomePageContent() {
               align="center"
             />
           </FadeInUp>
-          <StaggerInView className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <StaggerInView className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {content.services.items.map(service => (
-              <StaggerItem key={service.title}>
+              <StaggerItem key={service.title} className="h-full">
                 <ServiceCard {...service} />
               </StaggerItem>
             ))}

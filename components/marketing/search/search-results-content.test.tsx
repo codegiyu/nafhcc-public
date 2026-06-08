@@ -15,5 +15,6 @@ describe('SearchResultsContent', () => {
     expect(screen.getAllByText('Showing 1 to 12 of 18 results')).toHaveLength(2);
     expect(screen.getAllByRole('navigation', { name: 'Pagination' })).toHaveLength(2);
     expect(screen.getAllByRole('article')).toHaveLength(12);
+    expect(screen.getByRole('heading', { name: /Ready to find your home/i })).toBeInTheDocument();
   });
 });

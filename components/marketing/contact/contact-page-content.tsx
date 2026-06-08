@@ -1,20 +1,56 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, type LucideIcon } from 'lucide-react';
 import { FadeInUp } from '@/components/motion/fade-in-up';
 import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { ContactForm } from '@/components/marketing/contact/contact-form';
 import { ContactInfoCard } from '@/components/marketing/contact/contact-info-card';
-import { CtaBand } from '@/components/marketing/cta-band';
 import { HeroSection } from '@/components/marketing/hero-section';
 import { SectionHeader } from '@/components/marketing/overline-badge';
 import { SiteSection } from '@/components/layout/site-section';
-import { getContactPageContent } from '@/lib/content/contact';
+import { getContactPageContent, type ContactPageContent } from '@/lib/content/contact';
 import { cn } from '@/lib/utils';
 
-const quickContactIconMap = {
+type QuickContact = ContactPageContent['formSection']['quickContacts'][number];
+
+const quickContactIconMap: Record<QuickContact['icon'], LucideIcon> = {
   phone: Phone,
   mail: Mail,
   'map-pin': MapPin,
-} as const;
+};
+
+function QuickContactItem({ contact }: { contact: QuickContact }) {
+  const Icon = quickContactIconMap[contact.icon];
+
+  const content = (
+    <>
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <Icon className="size-4" aria-hidden />
+      </span>
+      <span className="text-sm leading-relaxed text-foreground">{contact.label}</span>
+    </>
+  );
+
+  return (
+    <li>
+      {contact.href ? (
+        <a href={contact.href} className="flex items-center gap-3 hover:text-primary">
+          {content}
+        </a>
+      ) : (
+        <div className="flex items-center gap-3">{content}</div>
+      )}
+    </li>
+  );
+}
+
+function QuickContactList({ contacts }: { contacts: QuickContact[] }) {
+  return (
+    <ul className="space-y-4">
+      {contacts.map(contact => (
+        <QuickContactItem key={contact.label} contact={contact} />
+      ))}
+    </ul>
+  );
+}
 
 export function ContactPageContent() {
   const content = getContactPageContent();
@@ -33,9 +69,9 @@ export function ContactPageContent() {
 
       <SiteSection className="bg-section-muted py-16 md:py-20">
         <div className="mx-auto max-w-container-wide px-6">
-          <StaggerInView className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <StaggerInView className="grid items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {content.infoCards.map(card => (
-              <StaggerItem key={card.title}>
+              <StaggerItem key={card.title} className="h-full">
                 <ContactInfoCard {...card} />
               </StaggerItem>
             ))}
@@ -51,31 +87,7 @@ export function ContactPageContent() {
               title={content.formSection.title}
               description={content.formSection.description}
             />
-            <ul className="space-y-4">
-              {content.formSection.quickContacts.map(contact => {
-                const Icon = quickContactIconMap[contact.icon];
-                const contentNode = (
-                  <>
-                    <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <Icon className="size-4" aria-hidden />
-                    </span>
-                    <span className="text-sm leading-relaxed text-foreground">{contact.label}</span>
-                  </>
-                );
-
-                return (
-                  <li key={contact.label}>
-                    {contact.href ? (
-                      <a href={contact.href} className="flex items-start gap-3 hover:text-primary">
-                        {contentNode}
-                      </a>
-                    ) : (
-                      <div className="flex items-start gap-3">{contentNode}</div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <QuickContactList contacts={content.formSection.quickContacts} />
           </FadeInUp>
 
           <FadeInUp
@@ -84,13 +96,6 @@ export function ContactPageContent() {
           </FadeInUp>
         </div>
       </SiteSection>
-
-      <CtaBand
-        title={content.cta.title}
-        description={content.cta.description}
-        primaryAction={content.cta.primaryAction}
-        secondaryAction={content.cta.secondaryAction}
-      />
     </>
   );
 }

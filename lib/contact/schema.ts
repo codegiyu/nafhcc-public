@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isValidPhoneNumber } from '@/lib/contact/phone';
 
 export const CONTACT_SUBJECTS = [
   'Housing Application Inquiry',
@@ -19,7 +20,12 @@ export const contactFormSchema = z.object({
     .min(1, 'Email is required')
     .email('Enter a valid email address')
     .max(254),
-  phone: trimmedString(30),
+  phone: z
+    .string()
+    .trim()
+    .min(1, 'Phone is required')
+    .max(30, 'Must be 30 characters or fewer')
+    .refine(isValidPhoneNumber, 'Enter a valid phone number (10–11 digits)'),
   subject: z.enum(CONTACT_SUBJECTS, { message: 'Select a valid subject' }),
   message: trimmedString(5000),
 });
@@ -40,4 +46,21 @@ export function formatContactFieldErrors(
   }
 
   return fieldErrors;
+}
+
+export function isContactFormValid(values: ContactFormInput): boolean {
+  return contactFormSchema.safeParse(values).success;
+}
+
+export function getContactFieldError(
+  field: keyof ContactFormInput,
+  values: ContactFormInput
+): string | undefined {
+  const result = contactFormSchema.safeParse(values);
+
+  if (result.success) {
+    return undefined;
+  }
+
+  return formatContactFieldErrors(result.error)[field];
 }

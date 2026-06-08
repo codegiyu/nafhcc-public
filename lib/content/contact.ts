@@ -30,12 +30,6 @@ export type ContactPageContent = {
     quickContacts: { icon: 'phone' | 'mail' | 'map-pin'; label: string; href?: string }[];
   };
   subjectOptions: string[];
-  cta: {
-    title: string;
-    description: string;
-    primaryAction: { label: string; href: string; showArrow?: boolean };
-    secondaryAction: { label: string; href: string; showArrow?: boolean };
-  };
 };
 
 const contactPageContent: ContactPageContent = {
@@ -86,12 +80,6 @@ const contactPageContent: ContactPageContent = {
     'Partnership Inquiry',
     'General Inquiry',
   ],
-  cta: {
-    title: 'Ready to find your home?',
-    description: 'Contact NAFHCC or apply for housing in any of our estates across Nigeria.',
-    primaryAction: { label: 'Apply Now', href: '/contact', showArrow: true },
-    secondaryAction: { label: 'Contact Us', href: '/contact', showArrow: false },
-  },
 };
 
 export function getContactPageContent(): ContactPageContent {

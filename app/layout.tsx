@@ -19,7 +19,11 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={cn('font-sans', inter.variable)} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn('font-sans', inter.variable)}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning>
       <body>
         <JsonLd />
         <Providers>

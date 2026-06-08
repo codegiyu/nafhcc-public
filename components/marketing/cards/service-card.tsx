@@ -19,7 +19,7 @@ export function ServiceCard({ title, description, icon, className }: ServiceCard
   return (
     <article
       className={cn(
-        'rounded-xl border border-border bg-card p-6 shadow-card transition-shadow hover:shadow-floating',
+        'flex h-full flex-col rounded-xl border border-border bg-card p-6 shadow-card transition-shadow hover:shadow-floating',
         className
       )}>
       <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">

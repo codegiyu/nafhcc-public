@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { contactFormSchema, formatContactFieldErrors } from '@/lib/contact/schema';
+import {
+  contactFormSchema,
+  formatContactFieldErrors,
+  getContactFieldError,
+  isContactFormValid,
+} from '@/lib/contact/schema';
 
 const validPayload = {
   firstName: 'John',
@@ -37,6 +42,23 @@ describe('contactFormSchema', () => {
     const result = contactFormSchema.safeParse({ ...validPayload, subject: 'Other' });
 
     expect(result.success).toBe(false);
+  });
+
+  it('rejects phone numbers with too few digits', () => {
+    const result = contactFormSchema.safeParse({ ...validPayload, phone: '12345' });
+
+    expect(result.success).toBe(false);
+  });
+
+  it('reports validity via isContactFormValid', () => {
+    expect(isContactFormValid(validPayload)).toBe(true);
+    expect(isContactFormValid({ ...validPayload, email: '' })).toBe(false);
+  });
+
+  it('returns a field-specific error via getContactFieldError', () => {
+    const error = getContactFieldError('email', { ...validPayload, email: 'bad' });
+
+    expect(error).toBeTruthy();
   });
 
   it('trims whitespace from string fields', () => {
