@@ -34,7 +34,7 @@ export function HomePageContent() {
         </div>
       </SiteSection>
 
-      <AboutSection content={content.about} />
+      <AboutSection content={content.about} stats={content.stats} />
 
       <SiteSection id="estates" className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">

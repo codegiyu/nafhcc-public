@@ -45,6 +45,11 @@ export type HomepageSection = {
   description?: string;
 };
 
+export type HomepageAboutHighlight = {
+  icon: 'shield' | 'award' | 'users';
+  label: string;
+};
+
 export type HomepageContent = {
   hero: {
     overline: string;
@@ -62,8 +67,12 @@ export type HomepageContent = {
     prices: string[];
   };
   about: HomepageSection & {
+    paragraphs: [string, string];
     imageUrl: string;
     imageAlt: string;
+    highlights: HomepageAboutHighlight[];
+    primaryAction: HomepageAction;
+    secondaryAction: HomepageAction;
   };
   estates: HomepageSection & {
     action: HomepageAction;
@@ -110,11 +119,20 @@ const homepageContent: HomepageContent = {
   },
   about: {
     overline: 'ABOUT NAFHCC',
-    title: 'Trusted housing for the NAF community',
-    description:
-      'The Nigerian Air Force Housing and Construction Company Ltd (NAFHCC) is a subsidiary of the Nigerian Air Force Holding Company. Our mission is to provide affordable, decently finished, and accessible post-service homes for Nigerian Air Force personnel. About 40% of homes built are also available for purchase by the general public, with personnel of other armed forces and para-military services eligible on a first-come-first-served basis.',
-    imageUrl: '/images/hero-estate.jpg',
-    imageAlt: 'NAFHCC residential estate development',
+    title: 'Building homes and communities for the Air Force family',
+    paragraphs: [
+      'Nigerian Air Force Housing and Construction Company Ltd (NAFHCC) was established to provide affordable, quality housing for officers, airmen and civilian staff of the Nigerian Air Force, and their families. We plan, develop and deliver complete residential estates — from land acquisition and master planning, to construction, allocation and handover.',
+      'Our estates across Abuja and beyond are designed with secure access, reliable infrastructure and a true sense of community in mind.',
+    ],
+    imageUrl: '/images/estate-valley.jpg',
+    imageAlt: 'Aerial view of NAFHCC residential estate development',
+    highlights: [
+      { icon: 'shield', label: 'Trusted by NAF community' },
+      { icon: 'award', label: 'Quality-led delivery' },
+      { icon: 'users', label: 'Thousands of families housed' },
+    ],
+    primaryAction: { label: 'Explore our estates', href: '/#estates', showArrow: true },
+    secondaryAction: { label: 'Get in touch', href: '/contact', showArrow: false },
   },
   estates: {
     overline: 'FEATURED ESTATES',
@@ -262,6 +280,14 @@ export function validateHomepageContent(content: HomepageContent): string[] {
 
   if (!content.about.imageUrl.trim()) {
     errors.push('about.imageUrl is required');
+  }
+
+  if (content.about.paragraphs.length !== 2) {
+    errors.push('about.paragraphs must include exactly two entries');
+  }
+
+  if (content.about.highlights.length < 1) {
+    errors.push('about.highlights must include at least one item');
   }
 
   if (content.estates.items.length < 1) {

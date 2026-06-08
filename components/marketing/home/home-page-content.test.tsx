@@ -14,6 +14,11 @@ describe('HomePageContent', () => {
       screen.getByRole('heading', { level: 1, name: /Quality Housing Estates Across Nigeria/i })
     ).toBeInTheDocument();
     expect(screen.getByText('ABOUT NAFHCC')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', {
+        name: 'Building homes and communities for the Air Force family',
+      })
+    ).toBeInTheDocument();
     expect(screen.getByText('FEATURED ESTATES')).toBeInTheDocument();
     expect(screen.getByText('WHAT WE DO')).toBeInTheDocument();
     expect(screen.getByText('OUR PROCESS')).toBeInTheDocument();

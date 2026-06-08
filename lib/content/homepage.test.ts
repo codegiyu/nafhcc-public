@@ -12,7 +12,9 @@ describe('homepage content', () => {
 
     expect(content.hero.title).toContain('Quality Housing');
     expect(content.about.overline).toBe('ABOUT NAFHCC');
-    expect(content.about.title).toContain('Trusted housing');
+    expect(content.about.title).toContain('Building homes and communities');
+    expect(content.about.paragraphs).toHaveLength(2);
+    expect(content.about.highlights).toHaveLength(3);
     expect(content.estates.overline).toBe('FEATURED ESTATES');
     expect(content.services.overline).toBe('WHAT WE DO');
     expect(content.process.overline).toBe('OUR PROCESS');
