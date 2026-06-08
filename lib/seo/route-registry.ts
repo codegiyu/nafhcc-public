@@ -27,6 +27,7 @@ const staticPlannedRoutes: RouteEntry[] = [
   { path: '/gallery', status: 'planned', changefreq: 'weekly', priority: 0.6 },
   { path: '/blog', status: 'planned', changefreq: 'weekly', priority: 0.6 },
   { path: '/agents', status: 'planned', changefreq: 'monthly', priority: 0.6 },
+  { path: '/search', status: 'live', changefreq: 'weekly', priority: 0.85 },
 ];
 
 const estateRoutes: RouteEntry[] = estateSlugs.map(slug => ({

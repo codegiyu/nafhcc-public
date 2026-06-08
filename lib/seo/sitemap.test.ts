@@ -2,10 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { buildSitemapEntries } from '@/lib/seo/sitemap';
 
 describe('buildSitemapEntries', () => {
-  it('includes only live routes', () => {
+  it('includes live routes', () => {
     const entries = buildSitemapEntries();
-    expect(entries).toHaveLength(1);
-    expect(entries[0]?.url).toBe('http://localhost:3000/');
+    expect(entries).toHaveLength(2);
+    expect(entries.map(entry => entry.url)).toEqual([
+      'http://localhost:3000/',
+      'http://localhost:3000/search',
+    ]);
   });
 
   it('attaches homepage image metadata', () => {

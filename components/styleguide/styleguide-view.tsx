@@ -227,7 +227,7 @@ export function StyleguideView() {
                 />
               </StyleguidePreviewBox>
               <StyleguidePreviewBox label="Search bar">
-                <SearchBar options={styleguideSearchOptions} action="/estates" />
+                <SearchBar options={styleguideSearchOptions} action="/search" />
               </StyleguidePreviewBox>
             </div>
           </StyleguideSection>

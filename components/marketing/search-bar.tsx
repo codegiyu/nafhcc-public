@@ -1,10 +1,12 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { InputWrapper } from '@/components/forms/input-wrapper';
 import { RegularSelect } from '@/components/forms/regular-select';
 import { Button } from '@/components/ui/button';
+import { buildSearchQuery } from '@/lib/search/search-params';
 import { cn } from '@/lib/utils';
 
 export type SearchBarOptions = {
@@ -13,35 +15,69 @@ export type SearchBarOptions = {
   prices: string[];
 };
 
+export type SearchBarDefaultValues = {
+  location?: string;
+  type?: string;
+  price?: string;
+};
+
 type SearchBarProps = {
   options: SearchBarOptions;
   action?: string;
+  defaultValues?: SearchBarDefaultValues;
   className?: string;
 };
 
-export function SearchBar({ options, action = '/estates', className }: SearchBarProps) {
-  const [location, setLocation] = useState(options.locations[0] ?? '');
-  const [type, setType] = useState(options.types[0] ?? '');
-  const [price, setPrice] = useState(options.prices[0] ?? '');
+export const SEARCH_SUBMIT_DELAY_MS = 1500;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+function resolveSelectValue(options: string[], value: string | undefined): string {
+  if (value && options.includes(value)) {
+    return value;
+  }
+
+  return options[0] ?? '';
+}
+
+export function buildSearchBarQuery(values: SearchBarDefaultValues): string {
+  return buildSearchQuery({
+    location: values.location && !values.location.startsWith('All') ? values.location : undefined,
+    type: values.type && !values.type.startsWith('All') ? values.type : undefined,
+    price: values.price && values.price !== 'Any Price' ? values.price : undefined,
+  });
+}
+
+export function SearchBar({
+  options,
+  action = '/search',
+  defaultValues,
+  className,
+}: SearchBarProps) {
+  const router = useRouter();
+  const [location, setLocation] = useState(() =>
+    resolveSelectValue(options.locations, defaultValues?.location)
+  );
+  const [type, setType] = useState(() => resolveSelectValue(options.types, defaultValues?.type));
+  const [price, setPrice] = useState(() =>
+    resolveSelectValue(options.prices, defaultValues?.price)
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const params = new URLSearchParams();
 
-    if (location && !location.startsWith('All')) {
-      params.set('location', location);
+    if (isSubmitting) {
+      return;
     }
 
-    if (type && !type.startsWith('All')) {
-      params.set('type', type);
-    }
+    setIsSubmitting(true);
 
-    if (price && price !== 'Any Price') {
-      params.set('price', price);
-    }
+    await new Promise(resolve => {
+      window.setTimeout(resolve, SEARCH_SUBMIT_DELAY_MS);
+    });
 
-    const query = params.toString();
-    window.location.href = query ? `${action}?${query}` : action;
+    const query = buildSearchBarQuery({ location, type, price });
+    router.push(query ? `${action}?${query}` : action);
+    setIsSubmitting(false);
   }
 
   return (
@@ -51,7 +87,7 @@ export function SearchBar({ options, action = '/estates', className }: SearchBar
         'flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-card lg:flex-row',
         className
       )}>
-      <fieldset className="grid flex-1 gap-4 sm:grid-cols-3">
+      <fieldset className="grid flex-1 gap-4 sm:grid-cols-3" disabled={isSubmitting}>
         <legend className="sr-only">Property search filters</legend>
         <RegularSelect
           id="search-location"
@@ -79,9 +115,15 @@ export function SearchBar({ options, action = '/estates', className }: SearchBar
         />
       </fieldset>
       <InputWrapper>
-        <Button id="search-submit" type="submit" size="lg" className="h-11 w-full lg:w-auto">
+        <Button
+          id="search-submit"
+          type="submit"
+          size="lg"
+          className="h-11 w-full lg:w-auto"
+          aria-busy={isSubmitting}
+          disabled={isSubmitting}>
           <Search aria-hidden />
-          Search Properties
+          {isSubmitting ? 'Searching…' : 'Search Properties'}
         </Button>
       </InputWrapper>
     </form>

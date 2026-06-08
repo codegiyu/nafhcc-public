@@ -30,7 +30,7 @@ export function HomePageContent() {
 
       <SiteSection className="bg-background pb-16 pt-4">
         <div className="mx-auto max-w-container-wide px-6">
-          <SearchBar options={content.search} action="/estates" />
+          <SearchBar options={content.search} action="/search" />
         </div>
       </SiteSection>
 

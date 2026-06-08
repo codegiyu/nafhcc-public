@@ -14,8 +14,8 @@ export function buildWebsiteSchema(includeSearchAction = false) {
   if (includeSearchAction) {
     schema.potentialAction = {
       '@type': 'SearchAction',
-      target: `${siteConfig.url}/estates?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
+      target: `${siteConfig.url}/search?location={location}&type={type}&price={price}`,
+      'query-input': 'required name=location required name=type required name=price',
     };
   }
 
