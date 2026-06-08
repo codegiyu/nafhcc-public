@@ -19,7 +19,7 @@ export function PropertyResultCard({
   return (
     <article
       className={cn(
-        'group overflow-hidden rounded-xl border border-border bg-card shadow-card transition-shadow hover:shadow-floating',
+        'group h-full grid grid-rows-[auto_1fr] overflow-hidden rounded-xl border border-border bg-card shadow-card transition-shadow hover:shadow-floating',
         className
       )}>
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -34,8 +34,8 @@ export function PropertyResultCard({
           For Sale
         </Badge>
       </div>
-      <div className="flex min-h-28 flex-col justify-between p-5">
-        <div className="space-y-3">
+      <div className="flex min-h-28 h-full flex-col justify-between space-y-3 p-5">
+        <div className="space-y-1">
           <h3 className="text-lg font-semibold text-foreground">{title}</h3>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <MapPin className="size-4 shrink-0" aria-hidden />

@@ -14,8 +14,8 @@ describe('AboutSection', () => {
         name: 'Building homes and communities for the Air Force family',
       })
     ).toBeInTheDocument();
-    expect(screen.getByText('10+')).toBeInTheDocument();
-    expect(screen.getByText('Years of Experience')).toBeInTheDocument();
+    expect(screen.getByText(content.stats[content.stats.length - 1]!.value)).toBeInTheDocument();
+    expect(screen.getByText(content.stats[content.stats.length - 1]!.label)).toBeInTheDocument();
     expect(screen.getByText('Trusted by NAF community')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Explore our estates/i })).toHaveAttribute(
       'href',

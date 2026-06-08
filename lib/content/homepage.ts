@@ -107,10 +107,10 @@ const homepageContent: HomepageContent = {
     imageAlt: getSiteImages().hero.alt,
   },
   stats: [
-    { value: '10+', label: 'Years of Experience' },
-    { value: '5,000+', label: 'Houses Delivered' },
-    { value: '15+', label: 'Estates Nationwide' },
-    { value: '100%', label: 'NAF Community Focus' },
+    { value: '10+', label: 'Residential Estates' },
+    { value: '5,000+', label: 'Housing Units Delivered' },
+    { value: '5+', label: 'States Nationwide' },
+    { value: '25+', label: 'Years of Service' },
   ],
   search: {
     locations: ['All Locations', 'Abuja', 'Enugu', 'Port Harcourt', 'Kaduna'],

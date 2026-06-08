@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Award, ShieldCheck, Users, type LucideIcon } from 'lucide-react';
 import { SiteSection } from '@/components/layout/site-section';
+import { SectionHeader } from '@/components/marketing/overline-badge';
 import { ButtonLinkWithArrow } from '@/components/ui/button-link-with-arrow';
 import type { HomepageAboutHighlight, HomepageContent, HomepageStat } from '@/lib/content/homepage';
 
@@ -20,16 +21,16 @@ function AboutHighlight({ icon, label }: HomepageAboutHighlight) {
 
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-card">
-      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-[6px] bg-primary/10 text-primary">
         <Icon className="size-5" aria-hidden />
       </div>
-      <p className="text-sm font-medium text-foreground">{label}</p>
+      <p className="text-xs font-medium text-foreground">{label}</p>
     </div>
   );
 }
 
 export function AboutSection({ content, stats }: AboutSectionProps) {
-  const featuredStat = stats[0];
+  const featuredStat = stats[stats.length - 1];
 
   return (
     <SiteSection id="about" className="bg-section-muted py-20 md:py-24">
@@ -46,7 +47,7 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
           </div>
 
           {featuredStat ? (
-            <div className="absolute -bottom-2 right-4 rounded-xl border border-border bg-card px-5 py-4 shadow-floating sm:right-6">
+            <div className="absolute -bottom-5 -right-5 rounded-xl border border-border bg-card px-5 py-4 shadow-floating">
               <p className="text-3xl font-bold text-primary">{featuredStat.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{featuredStat.label}</p>
             </div>
@@ -54,19 +55,12 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
         </div>
 
         <div className="space-y-6">
-          {content.overline ? (
-            <p className="text-caption text-primary">{content.overline}</p>
-          ) : null}
-          <h2 id="about-heading" className="text-h2 text-foreground">
-            {content.title}
-          </h2>
-          <div className="space-y-4">
-            {content.paragraphs.map(paragraph => (
-              <p key={paragraph} className="text-body-lg text-muted-foreground">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <SectionHeader
+            overline={content.overline}
+            title={content.title}
+            descriptions={content.paragraphs}
+            id="about-heading"
+          />
           <div className="grid gap-3 sm:grid-cols-3">
             {content.highlights.map(highlight => (
               <AboutHighlight key={highlight.label} {...highlight} />

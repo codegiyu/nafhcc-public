@@ -21,6 +21,7 @@ type SectionHeaderProps = {
   overline?: string;
   title: string;
   description?: string;
+  descriptions?: string[];
   action?: { label: string; href: string; showArrow?: boolean };
   align?: 'left' | 'center';
   id?: string;
@@ -31,6 +32,7 @@ export function SectionHeader({
   overline,
   title,
   description,
+  descriptions,
   action,
   align = 'left',
   id,
@@ -51,7 +53,17 @@ export function SectionHeader({
         <h2 id={id} className="text-h2 text-foreground">
           {title}
         </h2>
-        {description ? <p className="text-body-lg text-muted-foreground">{description}</p> : null}
+        {descriptions?.length ? (
+          <div className="space-y-4 pt-2">
+            {descriptions.map(paragraph => (
+              <p key={paragraph} className="text-body-lg text-muted-foreground">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : description ? (
+          <p className="text-body-lg text-muted-foreground">{description}</p>
+        ) : null}
       </div>
       {action ? (
         <TextActionLink href={action.href} showArrow={action.showArrow ?? true}>
