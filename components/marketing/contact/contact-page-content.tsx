@@ -1,4 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { FadeInUp } from '@/components/motion/fade-in-up';
+import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { ContactForm } from '@/components/marketing/contact/contact-form';
 import { ContactInfoCard } from '@/components/marketing/contact/contact-info-card';
 import { CtaBand } from '@/components/marketing/cta-band';
@@ -31,17 +33,19 @@ export function ContactPageContent() {
 
       <SiteSection className="bg-section-muted py-16 md:py-20">
         <div className="mx-auto max-w-container-wide px-6">
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          <StaggerInView className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {content.infoCards.map(card => (
-              <ContactInfoCard key={card.title} {...card} />
+              <StaggerItem key={card.title}>
+                <ContactInfoCard {...card} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         </div>
       </SiteSection>
 
       <SiteSection className="bg-background py-16 md:py-24">
         <div className="mx-auto grid max-w-container-wide gap-12 px-6 lg:grid-cols-[2fr_3fr] lg:gap-16">
-          <div className="space-y-8">
+          <FadeInUp className="space-y-8">
             <SectionHeader
               overline={content.formSection.overline}
               title={content.formSection.title}
@@ -72,11 +76,12 @@ export function ContactPageContent() {
                 );
               })}
             </ul>
-          </div>
+          </FadeInUp>
 
-          <div className={cn('rounded-xl border border-border bg-card p-6 shadow-card md:p-8')}>
+          <FadeInUp
+            className={cn('rounded-xl border border-border bg-card p-6 shadow-card md:p-8')}>
             <ContactForm subjectOptions={content.subjectOptions} />
-          </div>
+          </FadeInUp>
         </div>
       </SiteSection>
 

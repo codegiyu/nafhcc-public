@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { Award, ShieldCheck, Users, type LucideIcon } from 'lucide-react';
+import { FadeInUp } from '@/components/motion/fade-in-up';
+import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { SiteSection } from '@/components/layout/site-section';
 import { SectionHeader } from '@/components/marketing/overline-badge';
 import { ButtonLinkWithArrow } from '@/components/ui/button-link-with-arrow';
@@ -35,7 +37,7 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
   return (
     <SiteSection id="about" className="bg-section-muted py-20 md:py-24">
       <div className="mx-auto grid max-w-container-wide items-center gap-10 px-6 lg:grid-cols-2 lg:gap-16">
-        <div className="relative pb-8 lg:pb-0">
+        <FadeInUp className="relative pb-8 lg:pb-0">
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border shadow-card">
             <Image
               src={content.imageUrl}
@@ -52,20 +54,22 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
               <p className="mt-1 text-sm text-muted-foreground">{featuredStat.label}</p>
             </div>
           ) : null}
-        </div>
+        </FadeInUp>
 
-        <div className="space-y-6">
+        <FadeInUp className="space-y-6">
           <SectionHeader
             overline={content.overline}
             title={content.title}
             descriptions={content.paragraphs}
             id="about-heading"
           />
-          <div className="grid gap-3 sm:grid-cols-3">
+          <StaggerInView className="grid gap-3 sm:grid-cols-3">
             {content.highlights.map(highlight => (
-              <AboutHighlight key={highlight.label} {...highlight} />
+              <StaggerItem key={highlight.label}>
+                <AboutHighlight {...highlight} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
           <div className="flex flex-wrap gap-3 pt-2">
             <ButtonLinkWithArrow
               href={content.primaryAction.href}
@@ -81,7 +85,7 @@ export function AboutSection({ content, stats }: AboutSectionProps) {
               {content.secondaryAction.label}
             </ButtonLinkWithArrow>
           </div>
-        </div>
+        </FadeInUp>
       </div>
     </SiteSection>
   );

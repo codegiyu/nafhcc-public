@@ -1,6 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { PropertyResultCard } from '@/components/marketing/cards/property-result-card';
 import { SearchBar } from '@/components/marketing/search-bar';
 import { SearchResultsPagination } from '@/components/marketing/search/search-results-pagination';
@@ -9,6 +10,7 @@ import { SiteSection } from '@/components/layout/site-section';
 import { generatePropertySearchResults } from '@/lib/demo/generate-property-search-results';
 import { getHomepageContent } from '@/lib/content/homepage';
 import { DEFAULT_PAGE_SIZE, getPaginationMeta, paginateItems } from '@/lib/search/pagination';
+import { buildSearchContentKey } from '@/lib/motion/search-content-key';
 import { parseSearchParams } from '@/lib/search/search-params';
 
 function buildResultsHeading(filters: ReturnType<typeof parseSearchParams>): string {
@@ -34,6 +36,7 @@ export function SearchResultsContent() {
     pageSize: DEFAULT_PAGE_SIZE,
   });
   const visibleResults = paginateItems(results, { page: meta.page, pageSize: meta.pageSize });
+  const resultsContentKey = buildSearchContentKey({ location, type, price, page: meta.page });
   const pagination = <SearchResultsPagination meta={meta} filters={filters} action="/search" />;
 
   return (
@@ -53,11 +56,15 @@ export function SearchResultsContent() {
 
         <SearchResultsToolbar meta={meta} pagination={pagination} />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <StaggerInView
+          contentKey={resultsContentKey}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {visibleResults.map(result => (
-            <PropertyResultCard key={result.id} {...result} />
+            <StaggerItem key={result.id}>
+              <PropertyResultCard {...result} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerInView>
 
         <SearchResultsToolbar meta={meta} pagination={pagination} />
       </div>

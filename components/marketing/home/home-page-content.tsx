@@ -1,3 +1,5 @@
+import { FadeInUp } from '@/components/motion/fade-in-up';
+import { StaggerInView, StaggerItem } from '@/components/motion/stagger-in-view';
 import { ButtonLinkWithArrow } from '@/components/ui/button-link-with-arrow';
 import { CtaBand } from '@/components/marketing/cta-band';
 import { EstateCard } from '@/components/marketing/cards/estate-card';
@@ -29,79 +31,95 @@ export function HomePageContent() {
       />
 
       <SiteSection className="bg-background pb-16 pt-4">
-        <div className="mx-auto max-w-container-wide px-6">
+        <FadeInUp className="mx-auto max-w-container-wide px-6">
           <SearchBar options={content.search} action="/search" />
-        </div>
+        </FadeInUp>
       </SiteSection>
 
       <AboutSection content={content.about} stats={content.stats} />
 
       <SiteSection id="estates" className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader
-            overline={content.estates.overline}
-            title={content.estates.title}
-            action={content.estates.action}
-          />
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <FadeInUp>
+            <SectionHeader
+              overline={content.estates.overline}
+              title={content.estates.title}
+              action={content.estates.action}
+            />
+          </FadeInUp>
+          <StaggerInView className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {content.estates.items.map(estate => (
-              <EstateCard key={estate.href} {...estate} />
+              <StaggerItem key={estate.href}>
+                <EstateCard {...estate} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         </div>
       </SiteSection>
 
       <SiteSection id="services" className="bg-section-muted py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader
-            overline={content.services.overline}
-            title={content.services.title}
-            description={content.services.description}
-            align="center"
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <FadeInUp>
+            <SectionHeader
+              overline={content.services.overline}
+              title={content.services.title}
+              description={content.services.description}
+              align="center"
+            />
+          </FadeInUp>
+          <StaggerInView className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {content.services.items.map(service => (
-              <ServiceCard key={service.title} {...service} />
+              <StaggerItem key={service.title}>
+                <ServiceCard {...service} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         </div>
       </SiteSection>
 
       <SiteSection id="process" className="bg-background py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader
-            overline={content.process.overline}
-            title={content.process.title}
-            description={content.process.description}
-            align="center"
-          />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <FadeInUp>
+            <SectionHeader
+              overline={content.process.overline}
+              title={content.process.title}
+              description={content.process.description}
+              align="center"
+            />
+          </FadeInUp>
+          <StaggerInView className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {content.process.items.map(step => (
-              <ProcessStep key={step.step} {...step} />
+              <StaggerItem key={step.step}>
+                <ProcessStep {...step} />
+              </StaggerItem>
             ))}
-          </div>
-          <div className="flex justify-center pt-4">
+          </StaggerInView>
+          <FadeInUp className="flex justify-center pt-4">
             <ButtonLinkWithArrow
               href={content.process.cta.href}
               size="lg"
               showArrow={content.process.cta.showArrow ?? true}>
               {content.process.cta.label}
             </ButtonLinkWithArrow>
-          </div>
+          </FadeInUp>
         </div>
       </SiteSection>
 
       <SiteSection className="bg-section-muted py-20 md:py-24">
         <div className="mx-auto max-w-container-wide space-y-10 px-6">
-          <SectionHeader
-            overline={content.propertyTypes.overline}
-            title={content.propertyTypes.title}
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <FadeInUp>
+            <SectionHeader
+              overline={content.propertyTypes.overline}
+              title={content.propertyTypes.title}
+            />
+          </FadeInUp>
+          <StaggerInView className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {content.propertyTypes.items.map(type => (
-              <PropertyTypeCard key={type.title} {...type} />
+              <StaggerItem key={type.title}>
+                <PropertyTypeCard {...type} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerInView>
         </div>
       </SiteSection>
 

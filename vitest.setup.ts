@@ -7,3 +7,25 @@ afterEach(() => {
 });
 
 process.env.NEXT_PUBLIC_SITE_URL ??= 'http://localhost:3000';
+
+class MockIntersectionObserver {
+  readonly root: Element | Document | null = null;
+  readonly rootMargin = '';
+  readonly scrollMargin = '';
+  readonly thresholds: ReadonlyArray<number> = [];
+
+  constructor(_callback: IntersectionObserverCallback) {}
+
+  disconnect() {}
+
+  observe() {}
+
+  takeRecords(): IntersectionObserverEntry[] {
+    return [];
+  }
+
+  unobserve() {}
+}
+
+globalThis.IntersectionObserver =
+  MockIntersectionObserver as unknown as typeof IntersectionObserver;

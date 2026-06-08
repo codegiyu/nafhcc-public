@@ -11,7 +11,11 @@ type SiteSectionProps = {
 
 export function SiteSection({ children, className, id, labelledBy, ariaLabel }: SiteSectionProps) {
   return (
-    <section id={id} className={cn(className)} aria-labelledby={labelledBy} aria-label={ariaLabel}>
+    <section
+      id={id}
+      className={cn('overflow-hidden', className)}
+      aria-labelledby={labelledBy}
+      aria-label={ariaLabel}>
       {children}
     </section>
   );
