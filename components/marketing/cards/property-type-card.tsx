@@ -18,13 +18,16 @@ export function PropertyTypeCard({
 }: PropertyTypeCardProps) {
   return (
     <article
-      className={cn('relative aspect-[4/3] overflow-hidden rounded-xl shadow-card', className)}>
+      className={cn(
+        'group relative aspect-[4/3] overflow-hidden rounded-xl border border-border shadow-card transition-shadow hover:shadow-floating',
+        className
+      )}>
       <Image
         src={imageUrl}
         alt={imageAlt}
         fill
         sizes="(max-width: 768px) 100vw, 25vw"
-        className="object-cover"
+        className="object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-4">

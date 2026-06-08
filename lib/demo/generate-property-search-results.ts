@@ -72,6 +72,20 @@ function resolvePriceRange(price?: string): PriceRange {
   }
 }
 
+export function roundToTenThousand(amount: number): number {
+  return Math.round(amount / 10_000) * 10_000;
+}
+
+function clampPrice(amount: number, range: PriceRange): number {
+  return Math.min(Math.max(amount, range.min), range.max);
+}
+
+function generatePriceInRange(range: PriceRange, random: () => number): number {
+  const raw = Math.floor(random() * (range.max - range.min + 1)) + range.min;
+
+  return clampPrice(roundToTenThousand(raw), range);
+}
+
 function formatNaira(amount: number): string {
   return `₦${amount.toLocaleString('en-NG')}`;
 }
@@ -103,8 +117,7 @@ export function generatePropertySearchResults(filters: SearchFilters): PropertyS
     const propertyType = sharedType ?? resolveType(undefined, random);
     const location = resolveLocation(filters.location, random);
     const titleBase = pickRandom(TYPE_LABELS[propertyType], random);
-    const priceAmount =
-      Math.floor(random() * (priceRange.max - priceRange.min + 1)) + priceRange.min;
+    const priceAmount = generatePriceInRange(priceRange, random);
     const imageUrl = pickRandom(imagePool, random);
 
     return {

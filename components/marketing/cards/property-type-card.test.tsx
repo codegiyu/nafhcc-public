@@ -17,5 +17,7 @@ describe('PropertyTypeCard', () => {
     expect(screen.getByText('Complete units available')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: '3 bedroom terrace duplex' })).toBeInTheDocument();
     expect(container.querySelector('.aspect-\\[4\\/3\\]')).toBeInTheDocument();
+    expect(container.querySelector('article')).toHaveClass('group');
+    expect(container.querySelector('article')).toHaveClass('hover:shadow-floating');
   });
 });

@@ -46,4 +46,12 @@ describe('generatePropertySearchResults', () => {
       expect(result.priceAmount).toBeLessThan(10_000_000);
     }
   });
+
+  it('generates prices as multiples of ten thousand naira', () => {
+    const results = generatePropertySearchResults({});
+
+    for (const result of results) {
+      expect(result.priceAmount % 10_000).toBe(0);
+    }
+  });
 });
