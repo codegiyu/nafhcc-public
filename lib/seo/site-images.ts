@@ -13,7 +13,7 @@ const placeholderImages = {
     alt: 'NAFHCC logo',
   },
   ogDefault: {
-    url: 'https://placehold.co/1200x630/286da4/decfa5/png?text=NAFHCC',
+    url: 'https://static.crelyst.com.ng/nafhcc-site-preview.png',
     width: 1200,
     height: 630,
     alt: 'NAFHCC — Nigerian Air Force Housing and Construction Company',
